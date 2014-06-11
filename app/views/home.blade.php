@@ -1,4 +1,3 @@
-@section('content')
 <div id="slideshow">
   <div class="row">
     <div class="large-12 columns">
@@ -47,4 +46,3 @@
   </div>
   <?php endforeach; ?>
 </div>
-@stop

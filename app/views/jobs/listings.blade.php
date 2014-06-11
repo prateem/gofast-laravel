@@ -1,4 +1,3 @@
-@section('content')
 <div class="row">
   <div class="small-12 columns">
     <div class="row">
@@ -45,4 +44,3 @@
     </table>
   </div>
 </div>
-@stop

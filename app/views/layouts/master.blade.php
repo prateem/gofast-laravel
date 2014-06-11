@@ -1,8 +1,7 @@
 <?php
 
-if (!isset($page)) {
-  $page = null;
-}
+$title = isset($title) ? $title : null;
+$page = isset($page) ? $page : null;
 
 $description = 'Go Fast Express Inc.';
 ?>
@@ -11,7 +10,7 @@ $description = 'Go Fast Express Inc.';
 <head>
   <meta charset="utf-8">
   <title>
-    <?= $description ?>
+    {{ $title }} - <?= $description ?>
   </title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
@@ -24,7 +23,7 @@ $description = 'Go Fast Express Inc.';
   <link href="{{ asset('css/normalize.css') }}" type="text/css" rel="stylesheet"/>
   <link href="{{ asset('css/foundation.css') }}" type="text/css" rel="stylesheet"/>
   <link href="{{ asset('css/custom.css') }}" type="text/css" rel="stylesheet"/>
-  <?php if ($page == 'quotes'): ?>
+  <?php if ($title == 'Quotes'): ?>
   <link href="{{ asset('css/glDatePicker.flatwhite.css') }}" type="text/css" rel="stylesheet"/>
   <?php endif; ?>
 
@@ -54,10 +53,14 @@ $description = 'Go Fast Express Inc.';
               <li class="toggle-topbar menu-icon"><a href="#">Menu</a></li>
             </ul>
             <ul class="right">
-              <li <?php if ($page == 'home') echo 'class="active"'; ?>><?= link_to('/', 'Home') ?></li>
-              <li <?php if ($page == 'about') echo 'class="active"'; ?>><?= link_to('about', 'About Us') ?></li>
-              <li <?php if ($page == 'quotes') echo 'class="active"'; ?>><?= link_to('quotes', 'Quotes') ?></li>
+              <li <?php if ($title == 'Home') echo 'class="active"'; ?>><?= link_to('/', 'Home') ?></li>
+              <li <?php if ($title == 'About') echo 'class="active"'; ?>><?= link_to('about', 'About Us') ?></li>
+              <li <?php if ($title == 'Quotes') echo 'class="active"'; ?>><?= link_to('quotes', 'Quotes') ?></li>
               <li <?php if ($page == 'jobs') echo 'class="active"'; ?>><?= link_to('jobs', 'Jobs') ?></li>
+              <?php if (Auth::check()): ?>
+              <li><?= link_to('admin', 'Administration') ?></li>
+              <li><?= link_to_route('logout', 'Logout') ?></li>
+              <?php endif; ?>
             </ul>
           </div>
         </div>
@@ -65,7 +68,7 @@ $description = 'Go Fast Express Inc.';
     </div>
   </header>
 
-  @yield('content')
+  {{ $content }}
 
 </div>
 <footer>
@@ -98,15 +101,15 @@ $description = 'Go Fast Express Inc.';
     </div>
   </div>
 </footer>
-<script type="text/javascript" src="{{asset('js/vendor/jquery.js')}}"></script>
-<?php if ($page == 'quotes'): ?><script type="text/javascript" src="{{asset('js/glDatePicker.js')}}"></script><?php endif; ?>
-<script type="text/javascript" src="{{asset('js/fastclick.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/foundation.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/foundation/foundation.dropdown.js')}}"></script>
-<script type="text/javascript" src="{{asset('js/foundation/foundation.topbar.js')}}"></script>
+<script type="text/javascript" src="{{ asset('js/vendor/jquery.js') }}"></script>
+<?php if ($title == 'Quotes'): ?><script type="text/javascript" src="{{ asset('js/glDatePicker.js') }}"></script><?php endif; ?>
+<script type="text/javascript" src="{{ asset('js/fastclick.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/foundation.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/foundation/foundation.dropdown.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/foundation/foundation.topbar.js') }}"></script>
 <script type="text/javascript">
   $(document).ready(function(){
-    <?php if ($page == 'quotes') { ?>
+    <?php if ($title == 'Quotes') { ?>
     $('.datepicker').glDatePicker({
       cssName: 'flatwhite'
     });

@@ -1,4 +1,3 @@
-@section('content')
 <div class="row">
   <div class="row">
     <div class="large-4 columns">
@@ -127,4 +126,3 @@
 
   {{ Form::close() }}
 </div>
-@stop

@@ -1,4 +1,3 @@
-@section('content')
 <div class="row">
   <div class="large-12 columns">
     <h2>About Us</h2>
@@ -28,4 +27,3 @@
     <p>Go Fast Express strives to be a cost efficient company, committed to our mission of expansion and development of our services throughout Canada and the United States. Our clients can rely on our commitment to build professional and mutually beneficial ventures with them, and to make those ventures successful.</p>
   </div>
 </div>
-@stop

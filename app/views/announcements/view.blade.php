@@ -1,4 +1,3 @@
-@section('content')
 <br>
 <div class="row">
   <ul class="breadcrumbs large-12 columns">
@@ -19,4 +18,3 @@
     <?= link_to('announcements', 'View all', ['class'=>'button right']) ?>
   </div>
 </div>
-@stop

@@ -19,6 +19,7 @@ class CreateJobsTable extends Migration {
       $table->string('description');
       $table->string('requirements');
       $table->date('posted');
+      $table->date('closing');
     });
 	}
 

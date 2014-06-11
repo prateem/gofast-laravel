@@ -14,9 +14,11 @@ class CreateAdminTable extends Migration {
 	{
 		//
     Schema::create('admin', function($table) {
-      $table->increments('id');
+      $table->increments('id')->unsigned();
       $table->string('username', 15);
       $table->string('password', 60);
+      $table->string('remember_token', 100)->nullable();
+      $table->timestamps();
     });
 	}
 

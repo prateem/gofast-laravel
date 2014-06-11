@@ -1,4 +1,3 @@
-@section('content')
 <div class="row">
   <div class="large-12 columns">
     <h1>All Announcements</h1>
@@ -19,7 +18,7 @@
 
         <?php foreach ($announcements as $announcement): ?>
         <tr>
-          <td><?= HTML::link('announcements/' . $announcement->slug, $announcement->title) ?></td>
+          <td><?= link_to('announcements/'. $announcement->slug, $announcement->title); ?></td>
           <td><?= $announcement->posted ?></td>
           <td>{{{ ((strlen($announcement->body) > 150) ? substr($announcement->body, 0, 150) . "..." : $announcement->body)  }}}</td>
         </tr>
@@ -38,4 +37,3 @@
     </table>
   </div>
 </div>
-@stop
