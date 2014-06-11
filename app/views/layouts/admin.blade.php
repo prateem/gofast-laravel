@@ -55,8 +55,8 @@ $description = 'Go Fast Express Inc.';
             <ul class="right">
               <li <?php if ($page == 'home') echo 'class="active"'; ?>><?= link_to('admin', 'Cpanel Home') ?></li>
               <?php if (Auth::check()): ?>
-              <li <?php if ($page == 'announcements') echo 'class="active"'; ?>><?= link_to('admin/announcements', 'Announcements') ?></li>
-              <li <?php if ($page == 'jobs') echo 'class="active"'; ?>><?= link_to('admin/jobs', 'Job Postings') ?></li>
+              <li <?php if ($page == 'announcements') echo 'class="active"'; ?>><?= link_to_route('adminAnnouncementsArchive', 'Announcements') ?></li>
+              <li <?php if ($page == 'jobs') echo 'class="active"'; ?>><?= link_to_route('adminJobListing', 'Job Postings') ?></li>
               <li><?= link_to_route('logout', 'Logout') ?></li>
               <?php endif; ?>
             </ul>

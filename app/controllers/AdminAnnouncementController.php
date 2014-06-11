@@ -16,7 +16,7 @@ class AdminAnnouncementController extends BaseController {
 
   public function getView($slug) {
     if ($announcement = Announcement::where('slug', $slug)->first()) {
-      $this->layout->title = h($announcement->title);
+      $this->layout->title = $announcement->title;
       $this->layout->content = View::make('admin.announcements.view', ['announcement' => $announcement]);
     } else {
       return Redirect::to('admin/announcements')->with('error', 'Announcement not found.');
@@ -28,14 +28,25 @@ class AdminAnnouncementController extends BaseController {
     $this->layout->content = View::make('admin.announcements.post');
   }
 
-  public function doPost() {
-    $announcement = new Announcement;
-    $validator = Validator::make(Input::all(), $announcement->rules);
+  public function savePost() {
+
+    $data = [
+      'title' => Input::get('title'),
+      'body' => Input::get('body'),
+    ];
+
+    $rules = [
+        'title' => 'required',
+        'body' => 'required',
+    ];
+
+    $validator = Validator::make($data, $rules);
 
     if ($validator->passes()) {
-      $announcement->title = Input::get('title');
-      $announcement->body = Input::get('body');
+      $announcement = new Announcement($data);
       $announcement->save();
+
+      return Redirect::route('adminAnnouncementsArchive')->with('message', 'Announcement successfully posted.');
     }
   }
 

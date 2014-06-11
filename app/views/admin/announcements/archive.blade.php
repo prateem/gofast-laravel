@@ -18,11 +18,11 @@
 
       <?php foreach ($announcements as $announcement): ?>
         <tr>
-          <td><?= link_to('admin/announcements/'. $announcement->slug, $announcement->title); ?></td>
+          <td><?= link_to_route('adminViewAnnouncement', $announcement->title, ['slug' => $announcement->slug]); ?></td>
           <td><?= $announcement->created_at ?></td>
           <td>{{{ ((strlen($announcement->body) > 150) ? substr($announcement->body, 0, 150) . "..." : $announcement->body)  }}}</td>
-          <td><?= link_to('admin/announcements/edit/'.$announcement->slug, 'Edit', ['class' => 'button small secondary']) ?></td>
-          <td><?= link_to('admin/announcements/delete/'.$announcement->id, 'Delete', ['class' => 'button small alert']) ?></td>
+          <td><?= link_to_route('editAnnouncement', 'Edit', ['slug' => $announcement->slug], ['class' => 'button small secondary']) ?></td>
+          <td><?= link_to_route('deleteAnnouncement', 'Delete', ['id' => $announcement->id], ['class' => 'button small alert']) ?></td>
         </tr>
       <?php endforeach; ?>
 

@@ -31,20 +31,19 @@ Route::group(['before' => 'auth'], function() {
 
   // Announcements
   // -------------------------------------------
-  Route::get('admin/announcements', 'AdminAnnouncementController@archive');
-  Route::get('admin/announcements/view/{slug}', 'AdminAnnouncementController@getView');
+  Route::get('admin/announcements',               ['as' => 'adminAnnouncementsArchive', 'uses' => 'AdminAnnouncementController@archive']);
+  Route::get('admin/announcements/view/{slug}',   ['as' => 'adminViewAnnouncement', 'uses' => 'AdminAnnouncementController@getView']);
+  Route::get('admin/announcements/delete/{id}',   ['as' => 'deleteAnnouncement', 'uses' => 'AdminAnnouncementController@delete']);
 
-  Route::get('admin/announcements/post', 'AdminAnnouncementController@getPost');
-  Route::post('admin/announcements/post', 'AdminAnnouncementController@doPost');
+  Route::get('admin/announcements/post',          ['as' => 'newAnnouncement', 'uses' => 'AdminAnnouncementController@getPost']);
+  Route::post('admin/announcements/post',         ['as' => 'submitAnnouncement', 'uses' => 'AdminAnnouncementController@savePost']);
 
-  Route::get('admin/announcements/delete/{id}', 'AdminAnnouncementController@delete');
-
-  Route::get('admin/announcements/edit/{slug}', 'AdminAnnouncementController@getEdit');
-  Route::post('admin/announcements/edit/{slug}', 'AdminAnnouncementController@doEdit');
+  Route::get('admin/announcements/edit/{slug}',   ['as' => 'editAnnouncement', 'uses' => 'AdminAnnouncementController@getEdit']);
+  Route::post('admin/announcements/edit/{slug}',  ['as' => 'submitAnnouncementEdit', 'uses' => 'AdminAnnouncementController@doEdit']);
 
   // Job Postings
   // -------------------------------------------
-  Route::get('admin/jobs', 'AdminJobController@index');
+  Route::get('admin/jobs', ['as' => 'adminJobListing', 'uses' => 'AdminJobController@index']);
   Route::get('admin/jobs/post', 'AdminJobController@post');
   Route::get('admin/jobs/edit', 'AdminJobController@edit');
   Route::get('admin/jobs/delete', 'AdminJobController@delete');
@@ -54,6 +53,6 @@ Route::group(['before' => 'auth'], function() {
   Route::get('admin/logout', ['as' => 'logout', 'uses' => 'AdminController@logout']);
 });
 Route::get('admin/add', 'AdminController@add');
-Route::post('admin/add', ['as' => 'add', 'uses' => 'AdminController@addAdmin']);
-Route::get('admin/login', ['as' => 'login', 'uses' => 'AdminController@login']);
-Route::post('admin/login', ['as' => 'doLogin', 'uses' => 'AdminController@doLogin']);
+Route::post('admin/add',    ['as' => 'add', 'uses' => 'AdminController@addAdmin']);
+Route::get('admin/login',   ['as' => 'login', 'uses' => 'AdminController@login']);
+Route::post('admin/login',  ['as' => 'doLogin', 'uses' => 'AdminController@doLogin']);

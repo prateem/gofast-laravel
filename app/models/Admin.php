@@ -10,7 +10,6 @@ class Admin extends Eloquent implements UserInterface, RemindableInterface {
   use UserTrait, RemindableTrait;
 
   protected $table = 'admin';
-  public $timestamps = false;
 
   public $rules = [
     'username' => 'required|alpha|min:5',
