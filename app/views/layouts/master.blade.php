@@ -93,12 +93,10 @@ $description = 'Go Fast Express Inc.';
     </div>
   </div>
   <div class="subfooter">
-    <div class="row">
-      <div class="small-12 columns subheader">
+      <div class=" row">
         <small>©2014 Go Fast Express Inc. All Rights Reserved.</small>
         <small><a href="#">Privacy Policy</a></small>
       </div>
-    </div>
   </div>
 </footer>
 <script type="text/javascript" src="{{ asset('js/vendor/jquery.js') }}"></script>
