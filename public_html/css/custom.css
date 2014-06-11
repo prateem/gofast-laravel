@@ -116,8 +116,9 @@ footer h4{
   font-weight:bold;
 }
 .subfooter{
-  background-color:#333;
-  padding:4px 0 6px;
+    ackground-color:#333;
+  border-top:1px solid #BBB;
+  adding:3px 0 5px;
 }
 .contain-to-grid{
 background-color:rgba(0,0,0,0.5);
