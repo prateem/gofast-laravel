@@ -11,7 +11,13 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
+Route::get('/', 'HomeController@index');
+Route::get('about', 'HomeController@about');
+
+Route::get('quotes', 'QuoteController@index');
+
+Route::get('jobs', 'JobController@listings');
+Route::get('jobs/view/{id}', 'JobController@view');
+
+Route::get('announcements', 'AnnouncementController@archive');
+Route::get('announcements/{slug}', 'AnnouncementController@view');
