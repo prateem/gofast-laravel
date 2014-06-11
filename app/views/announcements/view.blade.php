@@ -10,7 +10,7 @@
 <div class="row">
   <div class="small-12 columns">
     <h1>{{{ $announcement->title }}}</h1>
-    <p class="right"><em>Date Posted: <?= $announcement->posted ?></em></p>
+    <p class="right"><em>Date Posted: <?= $announcement->created_at ?></em></p>
     <hr/>
 
     <p>{{{ $announcement->body }}}</p>

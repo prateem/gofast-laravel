@@ -18,7 +18,7 @@ class CreateAnnouncementsTable extends Migration {
       $table->string('title', 60);
       $table->string('slug', 60);
       $table->text('body');
-      $table->date('posted');
+      $table->timestamps();
     });
   }
 

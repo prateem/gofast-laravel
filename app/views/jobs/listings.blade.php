@@ -24,7 +24,7 @@
         <?php foreach ($jobs as $job): ?>
         <tr>
           <td><?= link_to('jobs/view/'. $job->id, $job->title) ?></td>
-          <td><?= $job->posted ?></td>
+          <td><?= $job->created_at ?></td>
           <td><?= $job->closing ?></td>
           <td>{{{ ((strlen($job->description) > 150) ? substr($job->description,0,150) . "..." : $job->description) }}}</td>
           <td>{{{ ((strlen($job->requirements) > 150) ? substr($job->requirements,0,150) . "..." : $job->requirements) }}}</td>

@@ -12,7 +12,7 @@
     <h1>{{{ $job->title }}}</h1>
 
     <p class="right">
-      <em><?= "Date Posted: " . $job->posted . " - Closing: " . $job->closing ?></em>
+      <em><?= "Date Posted: " . $job->created_at . " - Closing: " . $job->closing ?></em>
     </p>
 
     <h3>Description</h3>

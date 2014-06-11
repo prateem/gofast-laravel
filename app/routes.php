@@ -26,21 +26,31 @@ Route::get('announcements/{slug}', 'AnnouncementController@view');
 Route::group(['before' => 'auth'], function() {
 
   // Home page
+  // -------------------------------------------
   Route::get('admin', ['as' => 'adminHome', 'uses' => 'AdminController@index']);
 
   // Announcements
-  Route::get('admin/announcements', 'AdminAnnouncementController@index');
-  Route::get('admin/announcements/post', 'AdminAnnouncementController@post');
-  Route::get('admin/announcements/delete', 'AdminAnnouncementController@delete');
-  Route::get('admin/announcements/edit', 'AdminAnnouncementController@edit');
+  // -------------------------------------------
+  Route::get('admin/announcements', 'AdminAnnouncementController@archive');
+  Route::get('admin/announcements/view/{slug}', 'AdminAnnouncementController@getView');
+
+  Route::get('admin/announcements/post', 'AdminAnnouncementController@getPost');
+  Route::post('admin/announcements/post', 'AdminAnnouncementController@doPost');
+
+  Route::get('admin/announcements/delete/{id}', 'AdminAnnouncementController@delete');
+
+  Route::get('admin/announcements/edit/{slug}', 'AdminAnnouncementController@getEdit');
+  Route::post('admin/announcements/edit/{slug}', 'AdminAnnouncementController@doEdit');
 
   // Job Postings
+  // -------------------------------------------
   Route::get('admin/jobs', 'AdminJobController@index');
   Route::get('admin/jobs/post', 'AdminJobController@post');
   Route::get('admin/jobs/edit', 'AdminJobController@edit');
   Route::get('admin/jobs/delete', 'AdminJobController@delete');
 
   // Can't log out if you aren't logged in.
+  // -------------------------------------------
   Route::get('admin/logout', ['as' => 'logout', 'uses' => 'AdminController@logout']);
 });
 Route::get('admin/add', 'AdminController@add');

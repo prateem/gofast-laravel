@@ -3,7 +3,7 @@
 class AnnouncementController extends BaseController {
 
   public function archive() {
-    $announcements = Announcement::orderBy('posted', 'DESC')->paginate(5);
+    $announcements = Announcement::orderBy('created_at', 'DESC')->paginate(5);
     $this->layout->title = "Announcements";
     $this->layout->content = View::make('announcements.archive', ['announcements' => $announcements]);
   }

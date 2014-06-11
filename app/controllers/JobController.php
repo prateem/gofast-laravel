@@ -7,7 +7,7 @@ class JobController extends BaseController {
   }
 
   public function listings() {
-    $jobs = Job::orderBy('posted', 'DESC')->paginate(5);
+    $jobs = Job::orderBy('created_at', 'DESC')->paginate(5);
     $this->layout->title = "Jobs";
     $this->layout->content = View::make('jobs.listings', ['jobs' => $jobs]);
   }
