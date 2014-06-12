@@ -9,7 +9,7 @@ class AnnouncementController extends BaseController {
   }
 
   public function view($slug) {
-    if ($announcement = Announcement::where('slug', $slug)->firstOrFail()) {
+    if ($announcement = Announcement::whereSlug($slug)->first()) {
       $this->layout->title = $announcement->title;
       $this->layout->content = View::make('announcements.view', ['announcement' => $announcement]);
     } else {

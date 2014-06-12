@@ -14,4 +14,15 @@ class Announcement extends Eloquent implements SluggableInterface {
     'on_update' => true,
   ];
 
-} 
+  protected $rules = [
+      'title' => 'required',
+      'body' => 'required',
+  ];
+
+  public function validate($data) {
+    $validator = Validator::make($data, $this->rules);
+
+    return $validator->passes();
+  }
+
+}

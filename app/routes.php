@@ -11,11 +11,11 @@
 |
 */
 
-Route::get('/', 'HomeController@index');
-Route::get('about', 'HomeController@about');
+Route::get('/', ['as' => 'home', 'uses' => 'PagesController@home']);
+Route::get('about', ['as' => 'about', 'uses' => 'PagesController@about']);
 
-Route::get('quotes', 'QuoteController@index');
-Route::post('quotes', 'QuoteController@process');
+Route::get('quotes', ['as' => 'quotes', 'uses' => 'QuoteController@index']);
+Route::post('quotes', ['as' => 'requestQuote', 'uses' => 'QuoteController@process']);
 
 Route::get('jobs', 'JobController@listings');
 Route::get('jobs/view/{id}', 'JobController@view');
@@ -36,17 +36,22 @@ Route::group(['before' => 'auth'], function() {
   Route::get('admin/announcements/delete/{id}',   ['as' => 'deleteAnnouncement', 'uses' => 'AdminAnnouncementController@delete']);
 
   Route::get('admin/announcements/post',          ['as' => 'newAnnouncement', 'uses' => 'AdminAnnouncementController@getPost']);
-  Route::post('admin/announcements/post',         ['as' => 'submitAnnouncement', 'uses' => 'AdminAnnouncementController@savePost']);
+  Route::post('admin/announcements/post',         ['as' => 'submitAnnouncement', 'uses' => 'AdminAnnouncementController@saveAnnouncement']);
 
   Route::get('admin/announcements/edit/{slug}',   ['as' => 'editAnnouncement', 'uses' => 'AdminAnnouncementController@getEdit']);
   Route::post('admin/announcements/edit/{slug}',  ['as' => 'submitAnnouncementEdit', 'uses' => 'AdminAnnouncementController@doEdit']);
 
   // Job Postings
   // -------------------------------------------
-  Route::get('admin/jobs', ['as' => 'adminJobListing', 'uses' => 'AdminJobController@index']);
-  Route::get('admin/jobs/post', 'AdminJobController@post');
-  Route::get('admin/jobs/edit', 'AdminJobController@edit');
-  Route::get('admin/jobs/delete', 'AdminJobController@delete');
+  Route::get('admin/jobs',              ['as' => 'adminJobList', 'uses' => 'AdminJobController@listJobs']);
+  Route::get('admin/jobs/view/{id}',    ['as' => 'adminJobView', 'uses' => 'AdminJobController@getView']);
+  Route::get('admin/jobs/delete/{id}',  ['as' => 'deleteJob', 'uses' => 'AdminJobController@delete']);
+
+  Route::get('admin/jobs/post',         ['as' => 'newJob', 'uses' => 'AdminJobController@getPost']);
+  Route::post('admin/jobs/post',        ['as' => 'submitJob', 'uses' => 'AdminJobController@saveJob']);
+
+  Route::get('admin/jobs/edit/{id}',    ['as' => 'editJob', 'uses' => 'AdminJobController@getEdit']);
+  Route::post('admin/jobs/edit/{id}',   ['as' => 'submitJobEdit', 'uses' => 'AdminJobController@doEdit']);
 
   // Can't log out if you aren't logged in.
   // -------------------------------------------
