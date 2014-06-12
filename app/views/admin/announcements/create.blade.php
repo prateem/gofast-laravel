@@ -1,6 +1,14 @@
 <div class="row">
   <h1>Post New Announcement</h1>
 
+  @if(isset($errors))
+  <ul>
+    @foreach($errors as $e)
+    <li>{{ $e }}</li>
+    @endforeach
+  </ul>
+  @endif
+
   {{ Form::open(['route' => 'admin.announcements.store']) }}
 
   <div class="row">

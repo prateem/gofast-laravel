@@ -3,19 +3,15 @@
 class AdminJobController extends BaseController {
 
   protected $layout = 'layouts.admin';
-  protected $rules = [
-      'title' => 'required',
-      'description' => 'required',
-      'requirements' => 'required',
-      'closing' => 'date_format:Y-m-d',
-    ];
+  protected $job;
 
-  public function __construct() {
+  public function __construct(Job $job) {
+    $this->job = $job;
     View::share('page', 'jobs');
   }
 
   public function index() {
-    $jobs = Job::orderBy('created_at', 'DESC')->paginate(5);
+    $jobs = $this->job->orderBy('created_at', 'DESC')->paginate(5);
     $this->layout->title = "Jobs";
     $this->layout->content = View::make('admin.jobs.index')->withJobs($jobs);
   }
@@ -27,27 +23,19 @@ class AdminJobController extends BaseController {
   }
 
   public function store() {
-    $data = [
-        'title' => Input::get('title'),
-        'description' => Input::get('description'),
-        'requirements' => Input::get('requirements'),
-        'closing' => Input::get('closing')
-    ];
+    $input = Input::all();
 
-    $validator = Validator::make($data, $this->rules);
-
-    if ($validator->passes()) {
-      $job = new Job($data);
-      $job->save();
-
+    if ($this->job->fill($input)->isValid()) {
+      $this->job->save();
       return Redirect::route('admin.jobs.index')->withMessage('Job successfully posted.');
     } else {
-      return Redirect::route('admin.jobs.index')->withError('Job could not be posted.');
+      return Redirect::route('admin.jobs.index')->withErrors($this->job->errors);
     }
+
   }
 
   public function show($id) {
-    if ($job = Job::find($id)) {
+    if ($job = $this->job->find($id)) {
       $this->layout->title = $job->title;
       $this->layout->content = View::make('admin.jobs.show')->withJob($job);
     } else {
@@ -56,7 +44,7 @@ class AdminJobController extends BaseController {
   }
 
   public function edit($id) {
-    if ($job = Job::find($id)) {
+    if ($job = $this->job->find($id)) {
       $this->layout->title = 'Edit Job Posting';
       $this->layout->datepicker = true;
       $this->layout->content = View::make('admin.jobs.edit')->withJob($job);
@@ -66,36 +54,20 @@ class AdminJobController extends BaseController {
   }
 
   public function update($id) {
-    if ($job = Job::find($id)) {
+    $this->job = $this->job->find($id);
+    $input = Input::all();
 
-      $data = [
-          'title' => Input::get('title'),
-          'description' => Input::get('description'),
-          'requirements' => Input::get('requirements'),
-          'closing' => Input::get('closing')
-      ];
-
-      $validator = Validator::make($data, $this->rules);
-
-      if ($validator->passes()) {
-
-        $job->title = $data['title'];
-        $job->description = $data['description'];
-        $job->requirements = $data['requirements'];
-        $job->closing = $data['closing'];
-        $job->save();
-
-        return Redirect::route('admin.jobs.show', $id)->withMessage('Job edited.');
-      } else {
-        return Redirect::route('admin.jobs.edit', $id)->withErrors($validator)->withInput();
-      }
-
+    if ($this->job->fill($input)->isValid()) {
+      $this->job->save();
+      return Redirect::route('admin.jobs.show', $id)->withMessage('Job edited.');
+    } else {
+      return Redirect::back()->withInput()->withErrors($this->job->errors);
     }
+
   }
 
   public function destroy($id) {
-    $job = Job::find($id);
-    $job->delete();
+    $this->job->delete($id);
     return Redirect::route('admin.jobs.index')->withMessage('Job deleted.');
   }
 

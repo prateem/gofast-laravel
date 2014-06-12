@@ -2,18 +2,16 @@
 
 class AdminAnnouncementController extends BaseController {
 
+  protected $announcement;
   protected $layout = 'layouts.admin';
-  protected $rules = [
-      'title' => 'required',
-      'body' => 'required',
-    ];
 
-  public function __construct() {
+  public function __construct(Announcement $announcement) {
+    $this->announcement = $announcement;
     View::share('page', 'announcements');
   }
 
   public function index() {
-    $announcements = Announcement::orderBy('created_at', 'DESC')->paginate(5);
+    $announcements = $this->announcement->orderBy('created_at', 'DESC')->paginate(5);
     $this->layout->title = "Announcements";
     $this->layout->content = View::make('admin.announcements.index')->withAnnouncements($announcements);
   }
@@ -24,26 +22,18 @@ class AdminAnnouncementController extends BaseController {
   }
 
   public function store() {
-
-    $data = [
-        'title' => Input::get('title'),
-        'body' => Input::get('body'),
-    ];
-
-    $validator = Validator::make($data, $this->rules);
-
-    if ($validator->passes()) {
-      $announcement = new Announcement($data);
-      $announcement->save();
-
+    $input = Input::all();
+    if ($this->announcement->fill($input)->isValid()) {
+      $this->announcement->save();
       return Redirect::route('admin.announcements.index')->withMessage('Announcement successfully posted.');
     } else {
-      return Redirect::route('admin.announcements.index')->withError('Announcement could not be posted.');
+      return Redirect::back()->withInput()->withErrors($this->announcement->errors);
     }
+
   }
 
   public function show($slug) {
-    if ($announcement = Announcement::whereSlug($slug)->first()) {
+    if ($announcement = $this->announcement->whereSlug($slug)->first()) {
       $this->layout->title = $announcement->title;
       $this->layout->content = View::make('admin.announcements.show')->withAnnouncement($announcement);
     } else {
@@ -52,7 +42,7 @@ class AdminAnnouncementController extends BaseController {
   }
 
   public function edit($slug) {
-    if ($announcement = Announcement::whereSlug($slug)->first()) {
+    if ($announcement = $this->announcement->whereSlug($slug)->first()) {
       $this->layout->title = "Edit Announcement";
       $this->layout->content = View::make('admin.announcements.edit')->withAnnouncement($announcement);
     } else {
@@ -61,32 +51,20 @@ class AdminAnnouncementController extends BaseController {
   }
 
   public function update($slug) {
-    if ($announcement = Announcement::where('slug', $slug)->first()) {
+    $this->announcement = $this->announcement->whereSlug($slug)->first();
+    $input = Input::all();
 
-      $data = [
-          'title' => Input::get('title'),
-          'body' => Input::get('body'),
-      ];
-
-      $validator = Validator::make($data, $this->rules);
-
-      if ($validator->passes()) {
-        $announcement->title = $data['title'];
-        $announcement->body = $data['body'];
-        $announcement->save();
-
-        return Redirect::route('admin.announcements.show', $slug)->withMessage('Announcement edited.');
-      } else {
-        return Redirect::route('admin.announcements.edit', $slug)->withErrors($validator)->withInput();
-      }
-
+    if ($this->announcement->fill($input)->isValid()) {
+      $this->announcement->save();
+      return Redirect::route('admin.announcements.show', $slug)->withMessage('Announcement edited.');
+    } else {
+      return Redirect::back()->withInput()->withErrors($this->announcement->errors);
     }
+
   }
 
   public function destroy($slug) {
-    $announcement = Announcement::where('slug', $slug)->first();
-    $announcement->delete();
-
+    $this->announcement->whereSlug($slug)->delete();
     return Redirect::route('admin.announcements.index')->withMessage('Announcement deleted.');
   }
 

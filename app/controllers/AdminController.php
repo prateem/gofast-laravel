@@ -3,8 +3,10 @@
 class AdminController extends BaseController {
   protected $layout = 'layouts.admin';
   protected $hidden = array('password', 'remember_token');
+  protected $admin;
 
-  public function __construct() {
+  public function __construct(Admin $admin) {
+    $this->admin = $admin;
     View::share('page', 'home');
   }
 
@@ -14,22 +16,21 @@ class AdminController extends BaseController {
   }
 
   public function store() {
-    $admin = new Admin;
-    $validator = Validator::make(Input::all(), $admin->rules);
+    $input = Input::all();
 
-    if ($validator->passes()) {
-      $admin->username = Input::get('username');
-      $admin->password = Hash::make(Input::get('password'));
-      $admin->save();
-
+    if ($this->admin->fill($input)->isValid()) {
+      $this->admin->password = Hash::make($this->admin->password);
+      $this->admin->save();
       return Redirect::route('login');
     } else {
-      unset($admin);
-      return Redirect::route('admin.create')->withErrors($validator)->withInput();
+      return Redirect::back()->withInput()->withErrors($this->admin->errors);
     }
   }
 
   public function login() {
+    if (Auth::check()) {
+      return Redirect::route('admin.home');
+    }
     $this->layout->title = "Login";
     $this->layout->content = View::make('admin.login');
   }
@@ -43,9 +44,7 @@ class AdminController extends BaseController {
     if (Auth::attempt($userdata, true)) {
       return Redirect::route('admin.home');
     } else {
-      return Redirect::route('login')
-          ->withError('Invalid username and or password.')
-          ->withInput();
+      return Redirect::back()->withInput()->withError('Invalid username and or password.');
     }
   }
 

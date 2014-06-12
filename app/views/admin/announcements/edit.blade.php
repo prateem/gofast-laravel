@@ -3,6 +3,12 @@
 
   {{ Form::model($announcement, ['route' => ['admin.announcements.update', $announcement->slug], 'method' => 'put']) }}
 
+  <ul>
+    @foreach($errors->all() as $e)
+      <li>{{ $e }}</li>
+    @endforeach
+  </ul>
+
   <div class="row">
     <div class="medium-6 columns">
       {{ Form::label('title', 'Title') }}

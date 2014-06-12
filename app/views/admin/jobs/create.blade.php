@@ -1,6 +1,14 @@
 <div class="row">
   <h1>Create a Job Posting</h1>
 
+  @if(isset($errors))
+  <ul>
+    @foreach($errors as $e)
+    <li>{{ $e }}</li>
+    @endforeach
+  </ul>
+  @endif
+
   {{ Form::open(['route' => 'admin.jobs.store']) }}
 
   <div class="row">

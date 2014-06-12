@@ -8,6 +8,14 @@
     </div>
   </div>
 
+  @if(isset($errors))
+  <ul>
+    @foreach($errors as $e)
+    <li>{{ $e }}</li>
+    @endforeach
+  </ul>
+  @endif
+
   {{ Form::open(['action' => 'QuoteController@index']) }}
 
   <div class="row">

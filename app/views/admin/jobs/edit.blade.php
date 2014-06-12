@@ -3,6 +3,12 @@
 
   {{ Form::model($job, ['route' => ['admin.jobs.update', $job->id], 'method' => 'put']) }}
 
+  <ul>
+    @foreach($errors as $e)
+    <li>{{ $e }}</li>
+    @endforeach
+  </ul>
+
   <div class="row">
     <div class="small-12 medium-6 columns">
       {{ Form::label('title', 'Title') }}
