@@ -54,7 +54,7 @@ $description = 'Go Fast Express Inc.';
             </ul>
             <ul class="right">
               <li <?php if ($title == 'Home') echo 'class="active"'; ?>><?= link_to('/', 'Home') ?></li>
-              <li <?php if ($title == 'About') echo 'class="active"'; ?>><?= link_to('about', 'About Us') ?></li>
+              <li <?php if ($title == 'About') echo 'class="active"'; ?>><?= link_to('about', 'About') ?></li>
               <li <?php if ($title == 'Quotes') echo 'class="active"'; ?>><?= link_to('quotes', 'Quotes') ?></li>
               <li <?php if ($page == 'jobs') echo 'class="active"'; ?>><?= link_to('jobs', 'Jobs') ?></li>
               <?php if (Auth::check()): ?>
