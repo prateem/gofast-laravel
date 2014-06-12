@@ -1,6 +1,7 @@
 <div class="row">
   <div class="large-12 columns">
     <h2>About Us</h2>
+    <p>Go Fast Express Inc. is a transport company based in Mississauga, Ontario that prides itself on customer satisfaction. We are dedicated to building good relationships with our customers and bringing the best price to the table. We do trips across Canada and some of the United States.</p>
   </div>
 </div>
 <div class="row">
