@@ -2,7 +2,7 @@ html, body{height:100%;}
 .page-wrap {
   min-height: 100%;
   /* equal to footer height */
-  margin-bottom: -240px; 
+  margin-bottom: -214px; 
 }
 .page-wrap:after {
   content: "";
@@ -10,7 +10,7 @@ html, body{height:100%;}
 }
 footer, .page-wrap:after {
   /* .push must be the same height as footer */
-  height: 240px; 
+  height: 214px; 
 }
 html, body, p{
 font-family: 'Roboto', sans-serif;
@@ -111,17 +111,22 @@ footer{
   background-color:#333;
   color:#AAA;
   font-family: 'Roboto Condensed', sans-serif;
+  
 }
 .footercallout{
   background-color:#ee6123;
-  padding-top:1rem;
+  padding:0.3rem;
   color:#DDD;
+  -webkit-box-shadow: 0px 0px 5px rgba(0,0,0,.5);
+-moz-box-shadow: 0px 0px 5px rgba(0,0,0,.5);
+box-shadow: 0px 0px 5px rgba(0,0,0,.5);
 }
 .button.footer-button{
   padding:5px 10px;
   font-family: 'Roboto Condensed', sans-serif;
   color:#DDD;
   border:2px solid #DDD;
+  margin:0;
 }
 button.footer-button:hover, .button.footer-button:hover, button.footer-button:active, .button.footer-button:active, button.footer-button:focus, .button.footer-button:focus{
   color:#222;
@@ -133,6 +138,7 @@ button.footer-button:hover, .button.footer-button:hover, button.footer-button:ac
   border-top:1px solid #444;
   color:#AAA;
   padding:0.5rem;
+  
 }
 .contain-to-grid{
 background-color:rgba(0,0,0,0.5);
