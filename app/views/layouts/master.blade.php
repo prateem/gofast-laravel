@@ -5,6 +5,9 @@ $page = isset($page) ? $page : null;
 
 $description = 'Go Fast Express Inc.';
 date_default_timezone_set('America/New_York');
+
+if (!isset($message)) $message = Session::get('message', null);
+if (!isset($error)) $error = Session::get('error', null);
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -31,7 +34,9 @@ date_default_timezone_set('America/New_York');
 
 </head>
 <body>
+  @section('wrapper')
   <div class="page-wrap">
+  @show
     <header>
       <div class="row">
         <div class="large-4 columns">
@@ -75,9 +80,28 @@ date_default_timezone_set('America/New_York');
       </div>
     </header>
 
-    {{ $content }}
+    @if(isset($message))
+    <br>
+      <div class="row">
+        <div data-alert class="alert-box radius">
+          {{ $message }}
+          <a href="#" class="close">&times;</a>
+        </div>
+      </div>
+    @elseif(isset($error))
+    <br>
+    <div class="row">
+      <div data-alert class="alert-box alert radius">
+        {{ $error }}
+        <a href="#" class="close">&times;</a>
+      </div>
+    </div>
+    @endif
 
+    {{ $content }}
+  @section('wrapperEnd')
   </div>
+  @show
 
 @section('footer')
   <footer>

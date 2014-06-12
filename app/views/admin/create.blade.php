@@ -30,3 +30,4 @@
   </div>
 
   {{ Form::close() }}
+</div>

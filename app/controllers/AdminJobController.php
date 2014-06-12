@@ -56,7 +56,7 @@ class AdminJobController extends BaseController {
   }
 
   public function edit($id) {
-    if ($job = Job::get($id)) {
+    if ($job = Job::find($id)) {
       $this->layout->title = 'Edit Job Posting';
       $this->layout->datepicker = true;
       $this->layout->content = View::make('admin.jobs.edit')->withJob($job);
@@ -85,7 +85,7 @@ class AdminJobController extends BaseController {
         $job->closing = $data['closing'];
         $job->save();
 
-        return Redirect::route('admin.jobs.show', $id)->with('message', 'Job edited.');
+        return Redirect::route('admin.jobs.show', $id)->withMessage('Job edited.');
       } else {
         return Redirect::route('admin.jobs.edit', $id)->withErrors($validator)->withInput();
       }

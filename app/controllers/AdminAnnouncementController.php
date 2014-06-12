@@ -71,8 +71,8 @@ class AdminAnnouncementController extends BaseController {
       $validator = Validator::make($data, $this->rules);
 
       if ($validator->passes()) {
-        $announcement->title = $data->title;
-        $announcement->body = $data->body;
+        $announcement->title = $data['title'];
+        $announcement->body = $data['body'];
         $announcement->save();
 
         return Redirect::route('admin.announcements.show', $slug)->withMessage('Announcement edited.');

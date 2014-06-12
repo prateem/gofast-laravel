@@ -1,5 +1,8 @@
 @extends('layouts.master')
 
+@section('wrapper')
+@overwrite
+
 @section('header')
 Administration Panel
 @overwrite
@@ -15,8 +18,10 @@ Administration Panel
             </ul>
 @overwrite
 
-@section('footer')
+@section('wrapperEnd')
+@overwrite
 
+@section('footer')
 @overwrite
 
 @section('restdelete')

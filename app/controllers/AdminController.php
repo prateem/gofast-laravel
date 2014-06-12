@@ -50,8 +50,10 @@ class AdminController extends BaseController {
   }
 
   public function index() {
+    $announcements = Announcement::orderBy('created_at', 'DESC')->take(3)->get();
+    $jobs = Job::orderBy('created_at', 'DESC')->take(3)->get();
     $this->layout->title = "Admin Home";
-    $this->layout->content = View::make('admin.index');
+    $this->layout->content = View::make('admin.index')->withJobs($jobs)->withAnnouncements($announcements);
   }
 
   public function logout() {
