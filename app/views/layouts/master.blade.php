@@ -72,24 +72,34 @@ $description = 'Go Fast Express Inc.';
 
 </div>
 <footer>
+  <div class="footercallout show-for-medium-up">
+    <div class="row text-center">
+      Interested? <?= link_to('quotes', 'Send a Quote,', ['class'=>'button footer-button']) ?> or contact us by one of the ways below.
+    </div>
+  </div>
   <div class="row">
     <br/>
-    <div class="small-4 columns">
-      <ul class="no-bullet">
-        <li><h4>Location</h4></li>
+    <div class="small-12 medium-4 columns">
+      <ul class="no-bullet text-center">
+        <li>905-488-3118 (7am - 7pm)</li>
         <li>2828 Slough St.</li>
         <li>Mississauga, ON</li>
         <li>L4T 1G3</li>
       </ul>
     </div>
-    <div class="small-4 columns">
-      <ul class="no-bullet">
-        <li><h4>Contact Us</h4></li>
+    <div class="small-12 medium-4 columns">
+      <ul class="no-bullet text-center">
         <li>gofastexpress@gmail.com</li>
-        <li>905-488-3118 (7am - 7pm)</li>
+        <li>facebook link</li>
       </ul>
     </div>
-    <div class="small-4 columns">
+    <div class="small-12 medium-4 columns">
+      <ul class="no-bullet text-center show-for-medium-up">
+        <li <?php if ($title == 'Home') echo 'class="active"'; ?>><?= link_to('/', 'Home') ?></li>
+        <li <?php if ($title == 'About') echo 'class="active"'; ?>><?= link_to('about', 'About') ?></li>
+        <li <?php if ($title == 'Quotes') echo 'class="active"'; ?>><?= link_to('quotes', 'Quotes') ?></li>
+        <li <?php if ($page == 'jobs') echo 'class="active"'; ?>><?= link_to('jobs', 'Jobs') ?></li>
+      </ul>
     </div>
   </div>
   <div class="subfooter">

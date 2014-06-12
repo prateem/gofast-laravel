@@ -24,6 +24,8 @@
   </div>
   <div class="large-6 columns ">
     <h3>Contact</h3>
+    <div class="flex-video">
     <iframe width="400" height="280" frameborder="0" scrolling="yes" marginheight="0" marginwidth="0" src=		"http://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=2828+Slough+Street,+Mississauga,+Ontario,+Canada&amp;sll=43.710568,-79.656548&amp;sspn=0.009585,0.01929&amp;ie=UTF8&amp;hq=&amp;hnear=2871+Slough+St,+Mississauga,+Peel+Regional+Municipality,+Ontario+L4T+1G3,+Canada&amp;ll=43.71061,-79.656522&amp;spn=0.001152,0.001609&amp;t=h&amp;z=18&amp;iwloc=A&amp;output=embed"></iframe>
+  </div>
   </div>
 </div>

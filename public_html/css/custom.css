@@ -2,7 +2,7 @@ html, body{height:100%;}
 .page-wrap {
   min-height: 100%;
   /* equal to footer height */
-  margin-bottom: -180px; 
+  margin-bottom: -240px; 
 }
 .page-wrap:after {
   content: "";
@@ -10,7 +10,7 @@ html, body{height:100%;}
 }
 footer, .page-wrap:after {
   /* .push must be the same height as footer */
-  height: 180px; 
+  height: 240px; 
 }
 html, body, p{
 font-family: 'Roboto', sans-serif;
@@ -108,17 +108,31 @@ box-shadow: inset 0 0 10px #000000;
   color:#DDD;
 }
 footer{
-  background-color:#DDD;
-  color:#444;
+  background-color:#333;
+  color:#AAA;
+  font-family: 'Roboto Condensed', sans-serif;
 }
-footer h4{
-  color:#333;
-  font-weight:bold;
+.footercallout{
+  background-color:#ee6123;
+  padding-top:1rem;
+  color:#DDD;
+}
+.button.footer-button{
+  padding:5px 10px;
+  font-family: 'Roboto Condensed', sans-serif;
+  color:#DDD;
+  border:2px solid #DDD;
+}
+button.footer-button:hover, .button.footer-button:hover, button.footer-button:active, .button.footer-button:active, button.footer-button:focus, .button.footer-button:focus{
+  color:#222;
+  background-color:#EEE;
+  border:2px solid #EEE;
 }
 .subfooter{
-    ackground-color:#333;
-  border-top:1px solid #BBB;
-  adding:3px 0 5px;
+  background-color:#333;
+  border-top:1px solid #444;
+  color:#AAA;
+  padding:0.5rem;
 }
 .contain-to-grid{
 background-color:rgba(0,0,0,0.5);
