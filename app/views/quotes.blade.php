@@ -36,8 +36,8 @@
 
   <div class="row">
     <div class="medium-4 columns">
-      {{ Form::label('pickupDate', 'Pick-up Date (mm/dd/yyyy)') }}
-      {{ Form::text('pickupDate', null, ['placeholder' => '05/22/1992', 'class' => 'datepicker']) }}
+      {{ Form::label('pickupDate', 'Pick-up Date (yyyy-mm-dd)') }}
+      {{ Form::input('date', 'pickupDate', null, ['placeholder' => '1992-05-22', 'class' => 'datepicker']) }}
     </div>
     <div class="medium-8 columns">
       {{ Form::label('pickupStreet', 'Pick-up Street') }}
@@ -64,8 +64,8 @@
 
   <div class="row">
     <div class="medium-4 columns">
-      {{ Form::label('deliveryDate', 'Delivery Date (mm/dd/yyyy)') }}
-      {{ Form::text('deliveryDate', null, ['placeholder' => '12/25/1992', 'class' => 'datepicker']) }}
+      {{ Form::label('deliveryDate', 'Delivery Date (yyyy-mm-dd)') }}
+      {{ Form::input('date', 'deliveryDate', null, ['placeholder' => '1992-12-25', 'class' => 'datepicker']) }}
     </div>
     <div class="medium-8 columns">
       {{ Form::label('deliveryStreet', 'Delivery Street') }}

@@ -1,7 +1,7 @@
 <div class="row">
   <h1>Post New Announcement</h1>
 
-  {{ Form::open(['route' => 'submitAnnouncement']) }}
+  {{ Form::open(['route' => 'admin.announcements.store']) }}
 
   <div class="row">
     <div class="medium-6 columns">

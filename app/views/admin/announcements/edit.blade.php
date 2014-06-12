@@ -1,7 +1,7 @@
 <div class="row">
   <h1>Edit Announcement "{{{ $announcement->title }}}"</h1>
 
-  {{ Form::open(['route' => ['submitAnnouncementEdit', $announcement->slug]]) }}
+  {{ Form::open(['route' => ['admin.announcements.update', $announcement->slug], 'method' => 'put']) }}
 
   <div class="row">
     <div class="medium-6 columns">

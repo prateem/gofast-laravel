@@ -7,7 +7,7 @@
     @endforeach
   </ul>
 
-  {{ Form::open(['route' => 'add']) }}
+  {{ Form::open(['route' => 'admin.store']) }}
 
   <div class="row">
     <div class="medium-6 columns">

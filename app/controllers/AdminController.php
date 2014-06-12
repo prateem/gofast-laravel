@@ -8,12 +8,12 @@ class AdminController extends BaseController {
     View::share('page', 'home');
   }
 
-  public function add() {
+  public function create() {
     $this->layout->title = "Add Admin";
-    $this->layout->content = View::make('admin.add');
+    $this->layout->content = View::make('admin.create');
   }
 
-  public function addAdmin() {
+  public function store() {
     $admin = new Admin;
     $validator = Validator::make(Input::all(), $admin->rules);
 
@@ -25,7 +25,7 @@ class AdminController extends BaseController {
       return Redirect::route('login');
     } else {
       unset($admin);
-      return Redirect::to('admin/add')->withErrors($validator)->withInput();
+      return Redirect::route('admin.create')->withErrors($validator)->withInput();
     }
   }
 
@@ -41,10 +41,10 @@ class AdminController extends BaseController {
     ];
 
     if (Auth::attempt($userdata, true)) {
-      return Redirect::route('adminHome');
+      return Redirect::route('admin.home');
     } else {
       return Redirect::route('login')
-          ->with('error', 'Invalid username and or password.')
+          ->withError('Invalid username and or password.')
           ->withInput();
     }
   }

@@ -15,25 +15,28 @@
       </tr>
       </thead>
       <tbody>
-
-        <?php foreach ($announcements as $announcement): ?>
+        @foreach($announcements as $announcement)
         <tr>
-          <td><?= link_to('announcements/'. $announcement->slug, $announcement->title); ?></td>
-          <td><?= $announcement->created_at ?></td>
+          <td>{{ link_to_route('announcements.show', $announcement->title, $announcement->slug) }}</td>
+          <td>
+            <?php
+              $date = new DateTime($announcement->created_at);
+              echo $date->format('Y-m-d');
+            ?>
+          </td>
           <td>{{{ ((strlen($announcement->body) > 150) ? substr($announcement->body, 0, 150) . "..." : $announcement->body)  }}}</td>
         </tr>
-        <?php endforeach; ?>
-
+        @endforeach
       </tbody>
-      <?php if ($announcements->getLastPage() > 1): ?>
+      @if($announcements->getLastPage() > 1)
       <tfoot>
         <tr>
           <td colspan="3" class="text-center">
-            <?= $announcements->links() ?>
+            {{ $announcements->links() }}
           </td>
         </tr>
       </tfoot>
-      <?php endif; ?>
+      @endif
     </table>
   </div>
 </div>

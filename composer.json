@@ -14,6 +14,7 @@
 			"app/models",
 			"app/database/migrations",
 			"app/database/seeds",
+      "app/presenters",
 			"app/tests/TestCase.php"
 		]
 	},

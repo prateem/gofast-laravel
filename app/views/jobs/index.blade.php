@@ -21,26 +21,31 @@
       </thead>
       <tbody>
 
-        <?php foreach ($jobs as $job): ?>
+        @foreach($jobs as $job)
         <tr>
-          <td><?= link_to('jobs/view/'. $job->id, $job->title) ?></td>
-          <td><?= $job->created_at ?></td>
-          <td><?= $job->closing ?></td>
+          <td>{{ link_to_route('jobs.show', $job->title, $job->id) }}</td>
+          <td>
+            <?php
+              $date = new DateTime($job->created_at);
+              echo $date->format('Y-m-d');
+            ?>
+          </td>
+          <td>{{ $job->closing }}</td>
           <td>{{{ ((strlen($job->description) > 150) ? substr($job->description,0,150) . "..." : $job->description) }}}</td>
           <td>{{{ ((strlen($job->requirements) > 150) ? substr($job->requirements,0,150) . "..." : $job->requirements) }}}</td>
         </tr>
-        <?php endforeach; ?>
+        @endforeach
 
       </tbody>
-      <?php if ($jobs->getLastPage() > 1): ?>
+      @if($jobs->getLastPage() > 1)
       <tfoot>
         <tr>
           <td colspan="5" class="text-center">
-            <?= $jobs->links() ?>
+            {{ $jobs->links() }}
           </td>
         </tr>
       </tfoot>
-      <?php endif; ?>
+      @endif
     </table>
   </div>
 </div>

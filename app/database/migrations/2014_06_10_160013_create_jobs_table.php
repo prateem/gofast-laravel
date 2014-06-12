@@ -18,7 +18,7 @@ class CreateJobsTable extends Migration {
       $table->string('title');
       $table->string('description');
       $table->string('requirements');
-      $table->date('closing');
+      $table->date('closing')->default(null);
       $table->timestamps();
     });
 	}

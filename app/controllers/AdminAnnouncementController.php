@@ -3,70 +3,69 @@
 class AdminAnnouncementController extends BaseController {
 
   protected $layout = 'layouts.admin';
+  protected $rules = [
+      'title' => 'required',
+      'body' => 'required',
+    ];
 
   public function __construct() {
     View::share('page', 'announcements');
   }
 
-  public function archive() {
+  public function index() {
     $announcements = Announcement::orderBy('created_at', 'DESC')->paginate(5);
     $this->layout->title = "Announcements";
-    $this->layout->content = View::make('admin.announcements.archive', ['announcements' => $announcements]);
+    $this->layout->content = View::make('admin.announcements.index')->withAnnouncements($announcements);
   }
 
-  public function getView($slug) {
-    if ($announcement = Announcement::whereSlug($slug)->first()) {
-      $this->layout->title = $announcement->title;
-      $this->layout->content = View::make('admin.announcements.view', ['announcement' => $announcement]);
-    } else {
-      return Redirect::route('adminAnnouncementsArchive')->with('error', 'Announcement not found.');
-    }
-  }
-
-  public function getPost() {
+  public function create() {
     $this->layout->title = "Post New Announcement";
-    $this->layout->content = View::make('admin.announcements.post');
+    $this->layout->content = View::make('admin.announcements.create');
   }
 
-  public function saveAnnouncement() {
+  public function store() {
 
     $data = [
-      'title' => Input::get('title'),
-      'body' => Input::get('body'),
+        'title' => Input::get('title'),
+        'body' => Input::get('body'),
     ];
 
-    if (Announcement::validate($data)) {
+    $validator = Validator::make($data, $this->rules);
+
+    if ($validator->passes()) {
       $announcement = new Announcement($data);
       $announcement->save();
 
-      return Redirect::route('adminAnnouncementsArchive')->with('message', 'Announcement successfully posted.');
+      return Redirect::route('admin.announcements.index')->withMessage('Announcement successfully posted.');
     } else {
-      return Redirect::route('adminAnnouncementsArchive')->with('error', 'Announcement could not be posted.');
+      return Redirect::route('admin.announcements.index')->withError('Announcement could not be posted.');
     }
   }
 
-  public function delete($id) {
-    $announcement = Announcement::find($id);
-    $announcement->delete();
-
-    return Redirect::route('adminAnnouncementsArchive')->with('message', 'Announcement deleted.');
+  public function show($slug) {
+    if ($announcement = Announcement::whereSlug($slug)->first()) {
+      $this->layout->title = $announcement->title;
+      $this->layout->content = View::make('admin.announcements.show')->withAnnouncement($announcement);
+    } else {
+      return Redirect::route('admin.announcements.index')->withError('Announcement not found.');
+    }
   }
 
-  public function getEdit($slug) {
+  public function edit($slug) {
     if ($announcement = Announcement::whereSlug($slug)->first()) {
       $this->layout->title = "Edit Announcement";
-      $this->layout->content = View::make('admin.announcements.edit', ['announcement' => $announcement]);
+      $this->layout->content = View::make('admin.announcements.edit')->withAnnouncement($announcement);
     } else {
-      return Redirect::route('adminAnnouncementsArchive')->with('error', 'Announcement not found.');
+      return Redirect::route('admin.announcements.index')->withError('Announcement not found.');
     }
   }
 
-  public function doEdit($slug) {
+  public function update($slug) {
     if ($announcement = Announcement::where('slug', $slug)->first()) {
 
       $data = [
-        'title' => Input::get('title'),
-        'body' => Input::get('body'),
+          'title' => Input::get('title'),
+          'body' => Input::get('body'),
       ];
 
       $validator = Validator::make($data, $this->rules);
@@ -76,12 +75,19 @@ class AdminAnnouncementController extends BaseController {
         $announcement->body = $data->body;
         $announcement->save();
 
-        return Redirect::route('adminViewAnnouncement', ['slug' => $announcement->slug])->with('message', 'Announcement edited.');
+        return Redirect::route('admin.announcements.show', $slug)->withMessage('Announcement edited.');
       } else {
-        return Redirect::route('editAnnouncement', ['slug' => $announcement->slug])
-            ->withErrors($validator)->withInput();
+        return Redirect::route('admin.announcements.edit', $slug)->withErrors($validator)->withInput();
       }
 
     }
   }
+
+  public function destroy($slug) {
+    $announcement = Announcement::where('slug', $slug)->first();
+    $announcement->delete();
+
+    return Redirect::route('admin.announcements.index')->withMessage('Announcement deleted.');
+  }
+
 }
