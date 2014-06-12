@@ -18,7 +18,7 @@
           $posted = $date->format('Y-m-d');
           echo "Date Posted: " . $posted;
 
-          if (!is_null($job->closing)) {
+          if ($job->closing != '0000-00-00') {
             echo " - Closing: " . $job->closing;
           }
         ?>

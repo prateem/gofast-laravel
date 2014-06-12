@@ -15,7 +15,7 @@ class AdminJobController extends BaseController {
   }
 
   public function index() {
-    $jobs = Job::orderBy('closing', 'DESC')->paginate(5);
+    $jobs = Job::orderBy('created_at', 'DESC')->paginate(5);
     $this->layout->title = "Jobs";
     $this->layout->content = View::make('admin.jobs.index')->withJobs($jobs);
   }
