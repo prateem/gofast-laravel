@@ -33,61 +33,59 @@ if (!isset($error)) $error = Session::get('error', null);
   {{ HTML::script('js/modernizr.js') }}
 
 </head>
-<body>
-  @section('wrapper')
-  <div class="page-wrap">
-  @show
-    <header>
-      <div class="row">
-        <div class="large-4 columns">
-          <h1><a href="{{ URL::to('/') }}"><img src="{{ asset('img/logo.png') }}" width="250" height="250" alt="GoFast Express Logo"/></a></h1>
-        </div>
-        <div class="large-8 columns">
-          <br>
-            <h4 class="right">
-              @section('header')
-                Your #1 Source for Transportation Services
-              @show
-            </h4>
-        </div>
+<body class="site">
+  <header>
+    <div class="row">
+      <div class="large-4 columns">
+        <h1><a href="{{ URL::to('/') }}"><img src="{{ asset('img/logo.png') }}" width="250" height="250" alt="GoFast Express Logo"/></a></h1>
       </div>
-      <div class="contain-to-grid sticky">
-        <nav class="top-bar" data-topbar>
-          <!-- Right Nav Section -->
-          <div class="row">
-            <div class="large-12 columns">
-              <ul class="title-area">
-                <li class="name">
-                  <h1><a href="#"></a></h1>
-                </li>
-                <li class="toggle-topbar menu-icon"><a href="#">Menu</a></li>
+      <div class="large-8 columns">
+        <br>
+          <h4 class="right">
+            @section('header')
+              Your #1 Source for Transportation Services
+            @show
+          </h4>
+      </div>
+    </div>
+    <div class="contain-to-grid sticky">
+      <nav class="top-bar" data-topbar>
+        <!-- Right Nav Section -->
+        <div class="row">
+          <div class="large-12 columns">
+            <ul class="title-area">
+              <li class="name">
+                <h1><a href="#"></a></h1>
+              </li>
+              <li class="toggle-topbar menu-icon"><a href="#">Menu</a></li>
+            </ul>
+            @section('nav')
+              <ul class="right">
+                <li <?php if ($title == 'Home') echo 'class="active"'; ?>>{{ link_to_route('home', 'Home') }}</li>
+                <li <?php if ($title == 'About') echo 'class="active"'; ?>>{{ link_to_route('about', 'About') }}</li>
+                <li <?php if ($title == 'Quotes') echo 'class="active"'; ?>>{{ link_to_route('quotes', 'Quotes') }}</li>
+                <li <?php if ($page == 'jobs') echo 'class="active"'; ?>>{{ link_to_route('jobs.index', 'Jobs') }}</li>
+                @if (Auth::check())
+                <li>{{ link_to_route('admin.home', 'Administration') }}</li>
+                <li>{{ link_to_route('logout', 'Logout') }}</li>
+                @endif
               </ul>
-              @section('nav')
-                <ul class="right">
-                  <li <?php if ($title == 'Home') echo 'class="active"'; ?>>{{ link_to_route('home', 'Home') }}</li>
-                  <li <?php if ($title == 'About') echo 'class="active"'; ?>>{{ link_to_route('about', 'About') }}</li>
-                  <li <?php if ($title == 'Quotes') echo 'class="active"'; ?>>{{ link_to_route('quotes', 'Quotes') }}</li>
-                  <li <?php if ($page == 'jobs') echo 'class="active"'; ?>>{{ link_to_route('jobs.index', 'Jobs') }}</li>
-                  @if (Auth::check())
-                  <li>{{ link_to_route('admin.home', 'Administration') }}</li>
-                  <li>{{ link_to_route('logout', 'Logout') }}</li>
-                  @endif
-                </ul>
-              @show
-            </div>
+            @show
           </div>
-        </nav>
-      </div>
-    </header>
+        </div>
+      </nav>
+    </div>
+  </header>
 
+  <main class="content">
     @if(isset($message))
     <br>
-      <div class="row">
-        <div data-alert class="alert-box radius">
-          {{ $message }}
-          <a href="#" class="close">&times;</a>
-        </div>
+    <div class="row">
+      <div data-alert class="alert-box radius">
+        {{ $message }}
+        <a href="#" class="close">&times;</a>
       </div>
+    </div>
     @elseif(isset($error))
     <br>
     <div class="row">
@@ -99,9 +97,7 @@ if (!isset($error)) $error = Session::get('error', null);
     @endif
 
     {{ $content }}
-  @section('wrapperEnd')
-  </div>
-  @show
+  </main>
 
 @section('footer')
   <footer>

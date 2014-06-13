@@ -1,8 +1,9 @@
 <div class="row">
-  <h1>Job Postings</h1>
+  <div class="small-12 columns">
+    <h1>Job Postings</h1>
 
-  <table>
-    <thead>
+    <table>
+      <thead>
       <tr>
         <th>Title</th>
         <th>Posted</th>
@@ -10,15 +11,15 @@
         <th>Description</th>
         <th colspan="3">Requirements</th>
       </tr>
-    </thead>
-    <tbody>
+      </thead>
+      <tbody>
       @foreach($jobs as $job)
       <tr>
         <td>{{ link_to_route('admin.jobs.show', $job->title, $job->id) }}</td>
         <td>
           <?php
-            $date = new DateTime($job->created_at);
-            echo $date->format('Y-m-d');
+          $date = new DateTime($job->created_at);
+          echo $date->format('Y-m-d');
           ?>
         </td>
         <td class="text-center"><?= (($job->closing != '0000-00-00') ? $job->closing : 'N/A') ?></td>
@@ -28,16 +29,16 @@
         <td>{{ link_to_route('admin.jobs.destroy', 'Delete', $job->id, ['data-method' => 'delete', 'class' => 'button small alert']) }}</td>
       </tr>
       @endforeach
-    </tbody>
-    @if($jobs->getLastPage() > 1)
-    <tfoot>
+      </tbody>
+      @if($jobs->getLastPage() > 1)
+      <tfoot>
       <tr>
         <td colspan="7" class="text-center">
           {{ $jobs->links() }}
         </td>
       </tr>
-    </tfoot>
-    @endif
-  </table>
-</div>
+      </tfoot>
+      @endif
+    </table>
+  </div>
 </div>

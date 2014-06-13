@@ -1,17 +1,11 @@
-html, body{height:100%;}
-.page-wrap {
-  min-height: 100%;
-  /* equal to footer height */
-  margin-bottom: -214px; 
+/* Push footer to bottom of page */
+.site {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
-.page-wrap:after {
-  content: "";
-  display: block;
-}
-footer, .page-wrap:after {
-  /* .push must be the same height as footer */
-  height: 214px; 
-}
+.content { flex: 1; }
+
 html, body, p{
 font-family: 'Roboto', sans-serif;
 -webkit-font-smoothing:antialiased;
@@ -24,8 +18,7 @@ header{
   background: #23538a;/* /* Old browsers */
   background-image:url(../img/office.jpg);
   background-repeat:repeat;
-  
-  padding-top:1rem;
+  padding-top: 1rem;
 }
 header h4{
 color:#fff;

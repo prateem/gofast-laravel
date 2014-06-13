@@ -1,11 +1,7 @@
 <div class="row">
-  <div class="large-12 columns">
+  <div class="small-12 columns">
     <h1>All Announcements</h1>
-  </div>
-</div>
 
-<div class="row">
-  <div class="large-12 columns">
     <table>
       <thead>
       <tr>

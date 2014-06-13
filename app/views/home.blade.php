@@ -5,9 +5,9 @@
       <h4 class="subheader">Got a load? We got you covered. Request a quote today!</h4>
     </div>
   </div>
-  <div class="row">
+  <div class="row show-for-medium-up">
     <div class="large-12 columns">
-      <div class="orbit-container show-for-medium-up">
+      <div class="orbit-container">
         <ul data-orbit>
           <li>
             <img src="http://placehold.it/1000x400&text=[%20img%201%20]" alt="slide 1" />
@@ -33,16 +33,17 @@
   </div>
 </div>
 
-<div class="row">
-  <h2 class="large-12 columns">What's new</h2>
-</div>
-
 <!-- Three-up Content Blocks -->
 <div class="row">
-  <?php foreach ($news as $announcement): ?>
-  <div class="medium-4 columns">
-    <h4><?= link_to('announcements/' . $announcement->slug, $announcement->title) ?></h4>
-    <p>{{{ ((strlen($announcement->body) > 150) ? substr($announcement->body, 0, 150) . "..." : $announcement->body) }}}</p>
+  <div class="small-12 columns">
+    <h2>What's new</h2>
+    <div class="row">
+      @foreach($news as $announcement)
+        <div class="medium-4 columns">
+          <h4>{{ link_to_route('announcements.show', $announcement->title, $announcement->slug) }}</h4>
+          <p>{{{ ((strlen($announcement->body) > 150) ? substr($announcement->body, 0, 150) . "..." : $announcement->body) }}}</p>
+        </div>
+      @endforeach
+    </div>
   </div>
-  <?php endforeach; ?>
 </div>

@@ -1,50 +1,51 @@
 <div class="row">
-  <h1>Create a Job Posting</h1>
+  <div class="small-12 columns">
+    <h1>Create a Job Posting</h1>
 
-  @if(isset($errors))
-  <ul>
-    @foreach($errors as $e)
-    <li>{{ $e }}</li>
-    @endforeach
-  </ul>
-  @endif
+    @if(isset($errors))
+    <ul>
+      @foreach($errors as $e)
+      <li>{{ $e }}</li>
+      @endforeach
+    </ul>
+    @endif
 
-  {{ Form::open(['route' => 'admin.jobs.store']) }}
+    {{ Form::open(['route' => 'admin.jobs.store']) }}
 
-  <div class="row">
-    <div class="small-12 medium-6 columns">
-      {{ Form::label('title', 'Title') }}
-      {{ Form::text('title', null, ['placeholder' => 'Title']) }}
+    <div class="row">
+      <div class="small-12 medium-6 columns">
+        {{ Form::label('title', 'Title') }}
+        {{ Form::text('title', null, ['placeholder' => 'Title']) }}
+      </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="small-12 medium-10 columns">
-      {{ Form::label('description', 'Description') }}
-      {{ Form::textarea('description', null, ['placeholder' => 'The job description goes here.']) }}
+    <div class="row">
+      <div class="small-12 medium-10 columns">
+        {{ Form::label('description', 'Description') }}
+        {{ Form::textarea('description', null, ['placeholder' => 'The job description goes here.']) }}
+      </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="small-12 medium-10 columns">
-      {{ Form::label('requirements', 'Requirements') }}
-      {{ Form::textarea('requirements', null, ['placeholder' => 'The requirements to be qualified for the job go here.']) }}
+    <div class="row">
+      <div class="small-12 medium-10 columns">
+        {{ Form::label('requirements', 'Requirements') }}
+        {{ Form::textarea('requirements', null, ['placeholder' => 'The requirements to be qualified for the job go here.']) }}
+      </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="small-12 medium-4 columns">
-      {{ Form::label('closing', 'Close Date (yyyy-mm-dd)') }}
-      {{ Form::input('date', 'closing', null, ['placeholder' => '1992-05-22', 'class' => 'datepicker']) }}
+    <div class="row">
+      <div class="small-12 medium-4 columns">
+        {{ Form::label('closing', 'Close Date (yyyy-mm-dd)') }}
+        {{ Form::input('date', 'closing', null, ['placeholder' => '1992-05-22', 'class' => 'datepicker']) }}
+      </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="small-12 columns">
-      {{ Form::submit('Submit', ['class' => 'button']) }}
+    <div class="row">
+      <div class="small-12 columns">
+        {{ Form::submit('Submit', ['class' => 'button']) }}
+      </div>
     </div>
+
+    {{ Form::close() }}
   </div>
-
-  {{ Form::close() }}
-
 </div>

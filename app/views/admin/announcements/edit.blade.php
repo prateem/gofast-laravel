@@ -1,34 +1,35 @@
 <div class="row">
-  <h1>Edit Announcement "{{{ $announcement->title }}}"</h1>
+  <div class="small-12 columns">
+    <h1>Edit Announcement "{{{ $announcement->title }}}"</h1>
 
-  {{ Form::model($announcement, ['route' => ['admin.announcements.update', $announcement->slug], 'method' => 'put']) }}
+    {{ Form::model($announcement, ['route' => ['admin.announcements.update', $announcement->slug], 'method' => 'put']) }}
 
-  <ul>
-    @foreach($errors->all() as $e)
+    <ul>
+      @foreach($errors->all() as $e)
       <li>{{ $e }}</li>
-    @endforeach
-  </ul>
+      @endforeach
+    </ul>
 
-  <div class="row">
-    <div class="medium-6 columns">
-      {{ Form::label('title', 'Title') }}
-      {{ Form::text('title') }}
+    <div class="row">
+      <div class="medium-6 columns">
+        {{ Form::label('title', 'Title') }}
+        {{ Form::text('title') }}
+      </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="medium-10 columns">
-      {{ Form::label('body', 'Content') }}
-      {{ Form::textarea('body') }}
+    <div class="row">
+      <div class="medium-10 columns">
+        {{ Form::label('body', 'Content') }}
+        {{ Form::textarea('body') }}
+      </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="small-12 columns">
-      {{ Form::submit('Submit', ['class' => 'button']) }}
+    <div class="row">
+      <div class="small-12 columns">
+        {{ Form::submit('Submit', ['class' => 'button']) }}
+      </div>
     </div>
+
+    {{ Form::close() }}
   </div>
-
-  {{ Form::close() }}
-
 </div>
