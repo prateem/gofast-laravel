@@ -1,14 +1,10 @@
 <?php
 
-class AdminAnnouncementController extends BaseController {
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-  protected $announcement;
+class AdminAnnouncementController extends AnnouncementController {
+
   protected $layout = 'layouts.admin';
-
-  public function __construct(Announcement $announcement) {
-    $this->announcement = $announcement;
-    View::share('page', 'announcements');
-  }
 
   public function index() {
     $announcements = $this->announcement->orderBy('created_at', 'DESC')->paginate(5);
@@ -22,7 +18,9 @@ class AdminAnnouncementController extends BaseController {
   }
 
   public function store() {
+
     $input = Input::only('title',  'body');
+
     if ($this->announcement->fill($input)->isValid()) {
       $this->announcement->save();
       return Redirect::route('admin.announcements.index')->withMessage('Announcement successfully posted.');
@@ -33,21 +31,27 @@ class AdminAnnouncementController extends BaseController {
   }
 
   public function show($slug) {
-    if ($announcement = $this->announcement->whereSlug($slug)->first()) {
+
+    try {
+      $announcement = $this->announcement->whereSlug($slug)->firstOrFail();
       $this->layout->title = $announcement->title;
       $this->layout->content = View::make('admin.announcements.show')->withAnnouncement($announcement);
-    } else {
+    } catch (ModelNotFoundException $e) {
       return Redirect::route('admin.announcements.index')->withError('Announcement not found.');
     }
+
   }
 
   public function edit($slug) {
-    if ($announcement = $this->announcement->whereSlug($slug)->first()) {
+
+    try {
+      $announcement = $this->announcement->whereSlug($slug)->firstOrFail();
       $this->layout->title = "Edit Announcement";
       $this->layout->content = View::make('admin.announcements.edit')->withAnnouncement($announcement);
-    } else {
+    } catch (ModelNotFoundException $e) {
       return Redirect::route('admin.announcements.index')->withError('Announcement not found.');
     }
+
   }
 
   public function update($slug) {

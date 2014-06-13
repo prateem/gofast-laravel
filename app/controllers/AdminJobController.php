@@ -1,14 +1,10 @@
 <?php
 
-class AdminJobController extends BaseController {
+use \Illuminate\Database\Eloquent\ModelNotFoundException;
+
+class AdminJobController extends JobController {
 
   protected $layout = 'layouts.admin';
-  protected $job;
-
-  public function __construct(Job $job) {
-    $this->job = $job;
-    View::share('page', 'jobs');
-  }
 
   public function index() {
     $jobs = $this->job->orderBy('created_at', 'DESC')->paginate(5);
@@ -35,22 +31,28 @@ class AdminJobController extends BaseController {
   }
 
   public function show($id) {
-    if ($job = $this->job->find($id)) {
+
+    try {
+      $job = $this->job->findOrFail($id);
       $this->layout->title = $job->title;
       $this->layout->content = View::make('admin.jobs.show')->withJob($job);
-    } else {
+    } catch (ModelNotFoundException $e) {
       return Redirect::route('admin.jobs.index')->withError('Job not found.');
     }
+
   }
 
   public function edit($id) {
-    if ($job = $this->job->find($id)) {
+
+    try {
+      $job = $this->job->findOrFail($id);
       $this->layout->title = 'Edit Job Posting';
       $this->layout->datepicker = true;
       $this->layout->content = View::make('admin.jobs.edit')->withJob($job);
-    } else {
-      Redirect::route('admin.jobs.index')->withError('Job posting not found.');
+    } catch (ModelNotFoundException $e) {
+      return Redirect::route('admin.jobs.index')->withError('Job posting not found.');
     }
+
   }
 
   public function update($id) {

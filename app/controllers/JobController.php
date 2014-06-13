@@ -1,24 +1,32 @@
 <?php
 
+use \Illuminate\Database\Eloquent\ModelNotFoundException;
+
 class JobController extends BaseController {
 
-  public function __construct() {
+  protected $job;
+
+  public function __construct(Job $job) {
+    $this->job = $job;
     View::share('page', 'jobs');
   }
 
   public function index() {
-    $jobs = Job::orderBy('created_at', 'DESC')->paginate(5);
+    $jobs = $this->job->orderBy('created_at', 'DESC')->paginate(5);
     $this->layout->title = "Jobs";
     $this->layout->content = View::make('jobs.index')->withJobs($jobs);
   }
 
   public function show($id) {
-    if ($job = Job::find($id)) {
+
+    try {
+      $job = $this->job->findOrFail($id);
       $this->layout->title = $job->title;
       $this->layout->content = View::make('jobs.show')->withJob($job);
-    } else {
+    } catch (ModelNotFoundException $e) {
       return Redirect::route('jobs.index')->withError('Job posting not found.');
     }
+
   }
 
 }

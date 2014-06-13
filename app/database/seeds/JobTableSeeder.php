@@ -2,7 +2,7 @@
 
 class JobTableSeeder extends Seeder {
   public function run() {
-    DB::table('jobs')->delete();
+    Job::truncate();
 
     Job::create([
       'title' => 'Service Provider',

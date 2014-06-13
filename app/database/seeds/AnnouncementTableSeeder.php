@@ -4,7 +4,7 @@ class AnnouncementTableSeeder extends Seeder {
 
   public function run() {
 
-    DB::table('announcements')->delete();
+    Announcement::truncate();
 
     Announcement::create([
       'title' => 'test post please ignore',

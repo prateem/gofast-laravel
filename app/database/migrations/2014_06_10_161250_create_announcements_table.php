@@ -16,7 +16,7 @@ class CreateAnnouncementsTable extends Migration {
     Schema::create('announcements', function($table) {
       $table->increments('id');
       $table->string('title', 60);
-      $table->string('slug', 60);
+      $table->string('slug', 60)->unique();
       $table->text('body');
       $table->timestamps();
     });
