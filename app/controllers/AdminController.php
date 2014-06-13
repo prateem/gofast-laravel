@@ -23,7 +23,7 @@ class AdminController extends BaseController {
       $this->admin->save();
       return Redirect::route('login');
     } else {
-      return Redirect::back()->withInput()->withErrors($this->admin->errors);
+      return Redirect::back()->withInput()->withErrors($this->admin->getErrors());
     }
   }
 
