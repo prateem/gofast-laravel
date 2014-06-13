@@ -22,7 +22,7 @@ class AdminAnnouncementController extends BaseController {
   }
 
   public function store() {
-    $input = Input::all();
+    $input = Input::only('title',  'body');
     if ($this->announcement->fill($input)->isValid()) {
       $this->announcement->save();
       return Redirect::route('admin.announcements.index')->withMessage('Announcement successfully posted.');
@@ -52,7 +52,7 @@ class AdminAnnouncementController extends BaseController {
 
   public function update($slug) {
     $this->announcement = $this->announcement->whereSlug($slug)->first();
-    $input = Input::all();
+    $input = Input::only('title', 'body');
 
     if ($this->announcement->fill($input)->isValid()) {
       $this->announcement->save();

@@ -23,7 +23,7 @@ class AdminJobController extends BaseController {
   }
 
   public function store() {
-    $input = Input::all();
+    $input = Input::only('title', 'description', 'requirements', 'closing');
 
     if ($this->job->fill($input)->isValid()) {
       $this->job->save();
@@ -55,7 +55,7 @@ class AdminJobController extends BaseController {
 
   public function update($id) {
     $this->job = $this->job->find($id);
-    $input = Input::all();
+    $input = Input::only('title', 'description', 'requirements', 'closing');
 
     if ($this->job->fill($input)->isValid()) {
       $this->job->save();
