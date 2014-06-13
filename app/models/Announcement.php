@@ -17,7 +17,7 @@ class Announcement extends Crud implements SluggableInterface {
     'on_update' => true,
   ];
 
-  public $rules = [
+  protected $rules = [
       'title' => 'required',
       'body' => 'required',
   ];

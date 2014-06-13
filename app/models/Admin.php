@@ -5,7 +5,7 @@ use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableTrait;
 use Illuminate\Auth\Reminders\RemindableInterface;
 
-class Admin extends Crud implements UserInterface, RemindableInterface {
+class Admin extends Eloquent implements UserInterface, RemindableInterface {
 
   use UserTrait, RemindableTrait;
 
@@ -16,4 +16,6 @@ class Admin extends Crud implements UserInterface, RemindableInterface {
     'username' => 'required|alpha|min:5',
     'password' => 'required|alpha_num|min:5'
   ];
+
+
 }

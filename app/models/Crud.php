@@ -1,17 +1,35 @@
 <?php
 
 class Crud extends Eloquent {
-  public $errors;
-  public $rules;
+  protected $errors;
+  protected $rules;
 
-  public function isValid() {
-    $validation = Validator::make($this->attributes, $this->rules);
+  public static function boot() {
 
-    if ($validation->fails()) {
+    parent::boot();
+
+//    static::saving(function($model)
+//    {
+//      return $model->validates();
+//    });
+
+  }
+
+  public function validates() {
+
+    $validation = Validator::make($this->getAttributes(), $this->rules);
+
+    if ($validation->fails())
+    {
       $this->errors = $validation->messages();
       return false;
     }
 
     return true;
+
+  }
+
+  public function getErrors() {
+    return $this->errors;
   }
 }

@@ -19,14 +19,14 @@ class AdminAnnouncementController extends AnnouncementController {
 
   public function store() {
 
-    $input = Input::only('title',  'body');
+    $input = Input::only('title', 'body');
 
-    if ($this->announcement->fill($input)->isValid()) {
-      $this->announcement->save();
-      return Redirect::route('admin.announcements.index')->withMessage('Announcement successfully posted.');
-    } else {
-      return Redirect::back()->withInput()->withErrors($this->announcement->errors);
+    if (!$this->announcement->fill($input)->save())
+    {
+      return Redirect::back()->withInput()->withErrors($this->announcement->getErrors());
     }
+
+    return Redirect::route('admin.announcements.index')->withMessage('Announcement posted.');
 
   }
 
@@ -34,6 +34,7 @@ class AdminAnnouncementController extends AnnouncementController {
 
     try {
       $announcement = $this->announcement->whereSlug($slug)->firstOrFail();
+
       $this->layout->title = $announcement->title;
       $this->layout->content = View::make('admin.announcements.show')->withAnnouncement($announcement);
     } catch (ModelNotFoundException $e) {
@@ -46,6 +47,7 @@ class AdminAnnouncementController extends AnnouncementController {
 
     try {
       $announcement = $this->announcement->whereSlug($slug)->firstOrFail();
+
       $this->layout->title = "Edit Announcement";
       $this->layout->content = View::make('admin.announcements.edit')->withAnnouncement($announcement);
     } catch (ModelNotFoundException $e) {
@@ -55,14 +57,20 @@ class AdminAnnouncementController extends AnnouncementController {
   }
 
   public function update($slug) {
-    $this->announcement = $this->announcement->whereSlug($slug)->first();
+
     $input = Input::only('title', 'body');
 
-    if ($this->announcement->fill($input)->isValid()) {
-      $this->announcement->save();
+    try {
+
+      if (!$this->announcement->whereSlug($slug)->firstOrFail()->update($input))
+      {
+        return Redirect::back()->withInput()->withErrors($this->announcement->getErrors());
+      }
+
       return Redirect::route('admin.announcements.show', $slug)->withMessage('Announcement edited.');
-    } else {
-      return Redirect::back()->withInput()->withErrors($this->announcement->errors);
+
+    } catch (ModelNotFoundException $e) {
+      return Redirect::route('admin.announcements.index')->withError('Announcement not found.');
     }
 
   }
