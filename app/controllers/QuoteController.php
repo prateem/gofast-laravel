@@ -20,6 +20,9 @@ class QuoteController extends BaseController {
 
     if ($validation->passes()) {
       return "No email logic yet #lol";
+      Mail::send(['text' => 'emails.quote'], $input, function($message) {
+        $message->to('gofastquotes@gmail.com', 'GoFast')->subject('A quote has been requested!');
+      });
     } else {
       return Redirect::back()->withInput()->withErrors($validation->messages());
     }
