@@ -21,12 +21,12 @@ class AdminJobController extends JobController {
   public function store() {
     $input = Input::only('title', 'description', 'requirements', 'closing');
 
-    if ($this->job->fill($input)->isValid()) {
-      $this->job->save();
-      return Redirect::route('admin.jobs.index')->withMessage('Job successfully posted.');
-    } else {
-      return Redirect::route('admin.jobs.index')->withErrors($this->job->errors);
+    if (!$this->job->fill($input)->save())
+    {
+      return Redirect::back()->withInput()->withErrors($this->job->getErrors());
     }
+
+    return Redirect::route('admin.jobs.index')->withMessage('Job posted.');
 
   }
 
@@ -56,16 +56,20 @@ class AdminJobController extends JobController {
   }
 
   public function update($id) {
-    $this->job = $this->job->find($id);
     $input = Input::only('title', 'description', 'requirements', 'closing');
+    $input['closing'] = $input['closing'] ?: null;
 
-    if ($this->job->fill($input)->isValid()) {
-      $this->job->save();
+    try {
+
+      if (!$this->job->findOrFail($id)->update($input))
+      {
+        return Redirect::back()->withInput()->withErrors($this->job->getErrors());
+      }
+
       return Redirect::route('admin.jobs.show', $id)->withMessage('Job edited.');
-    } else {
-      return Redirect::back()->withInput()->withErrors($this->job->errors);
+    } catch (ModelNotFoundException $e) {
+      return Redirect::route('admin.jobs.index')->withError('Job not found.');
     }
-
   }
 
   public function destroy($id) {

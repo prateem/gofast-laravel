@@ -8,10 +8,10 @@ class Crud extends Eloquent {
 
     parent::boot();
 
-//    static::saving(function($model)
-//    {
-//      return $model->validates();
-//    });
+    static::saving(function($model)
+    {
+      return $model->validates();
+    });
 
   }
 
