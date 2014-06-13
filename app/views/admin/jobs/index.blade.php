@@ -1,3 +1,4 @@
+<?php $date = new DateTime(); ?>
 <div class="row">
   <div class="small-12 columns">
     <h1>Job Postings</h1>
@@ -18,11 +19,11 @@
         <td>{{ link_to_route('admin.jobs.show', $job->title, $job->id) }}</td>
         <td>
           <?php
-          $date = new DateTime($job->created_at);
+          $date->modify($job->created_at);
           echo $date->format('Y-m-d');
           ?>
         </td>
-        <td class="text-center"><?= (($job->closing != '0000-00-00') ? $job->closing : 'N/A') ?></td>
+        <td class="text-center">{{ ($job->closing ?: 'N/A') }}</td>
         <td>{{{ ((strlen($job->description) > 150) ? substr($job->description, 0, 150)."..." : $job->description) }}}</td>
         <td>{{{ ((strlen($job->requirements) > 150) ? substr($job->requirements, 0, 150)."..." : $job->requirements) }}}</td>
         <td>{{ link_to_route('admin.jobs.edit', 'Edit', $job->id, ['class' => 'button small secondary']) }}</td>

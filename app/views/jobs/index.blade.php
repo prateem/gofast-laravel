@@ -30,7 +30,7 @@
               echo $date->format('Y-m-d');
             ?>
           </td>
-          <td class="text-center"><?= (($job->closing != '0000-00-00') ? $job->closing : 'N/A') ?></td>
+          <td class="text-center">{{ ($job->closing ?: 'N/A') }}</td>
           <td>{{{ ((strlen($job->description) > 150) ? substr($job->description,0,150) . "..." : $job->description) }}}</td>
           <td>{{{ ((strlen($job->requirements) > 150) ? substr($job->requirements,0,150) . "..." : $job->requirements) }}}</td>
         </tr>

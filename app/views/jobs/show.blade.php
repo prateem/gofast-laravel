@@ -1,10 +1,12 @@
 <br>
 <div class="row">
+@section('breadcrumbs')
   <ul class="breadcrumbs small-12 columns">
     <li>{{ link_to_route('home', 'Home') }}</li>
     <li>{{ link_to_route('jobs.index', 'Jobs') }}</li>
     <li class="current">{{{ $job->title }}}</li>
   </ul>
+@show
 </div>
 
 <div class="row">
@@ -18,7 +20,7 @@
           $posted = $date->format('Y-m-d');
           echo "Date Posted: " . $posted;
 
-          if ($job->closing != '0000-00-00') {
+          if (!is_null($job->closing)) {
             echo " - Closing: " . $job->closing;
           }
         ?>
@@ -30,9 +32,11 @@
 
     <h3>Requirements</h3>
     <p>{{{ $job->requirements }}}</p>
-  <ul class="button-group">
-    <li>{{ link_to_route('jobs.apply', 'Apply', $job->id, ['class' => 'button right']) }}</li>
-    <li>{{ link_to_route('jobs.index', 'View All', null, ['class' => 'button right']) }}</li>
-  </ul>
+@section('links')
+    <ul class="button-group">
+      <li>{{ link_to_route('jobs.apply', 'Apply', $job->id, ['class' => 'button right']) }}</li>
+      <li>{{ link_to_route('jobs.index', 'View All', null, ['class' => 'button right']) }}</li>
+    </ul>
+@show
   </div>
 </div>

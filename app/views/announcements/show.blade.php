@@ -1,10 +1,12 @@
 <br>
 <div class="row">
+@section('breadcrumbs')
   <ul class="breadcrumbs large-12 columns">
     <li>{{ link_to_route('home', 'Home') }}</li>
     <li>{{ link_to_route('announcements.index', 'Announcements') }}</li>
     <li class="current">{{{ $announcement->title }}}</li>
   </ul>
+@show
 </div>
 
 <div class="row">
@@ -22,7 +24,8 @@
     <hr/>
 
     <p>{{{ $announcement->body }}}</p>
-
+@section('links')
     {{ link_to_route('announcements.index', 'View all', null, ['class'=>'button right']) }}
+@show
   </div>
 </div>
