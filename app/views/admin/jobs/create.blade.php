@@ -4,7 +4,7 @@
 
     @if(isset($errors))
     <ul>
-      @foreach($errors as $e)
+      @foreach($errors->all() as $e)
       <li>{{ $e }}</li>
       @endforeach
     </ul>

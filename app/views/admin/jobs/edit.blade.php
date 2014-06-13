@@ -5,7 +5,7 @@
     {{ Form::model($job, ['route' => ['admin.jobs.update', $job->id], 'method' => 'put']) }}
 
     <ul>
-      @foreach($errors as $e)
+      @foreach($errors->all() as $e)
       <li>{{ $e }}</li>
       @endforeach
     </ul>
