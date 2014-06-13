@@ -69,7 +69,7 @@ class AdminJobController extends JobController {
   }
 
   public function destroy($id) {
-    $this->job->->find($id)delete();
+    $this->job->find($id)->delete();
     return Redirect::route('admin.jobs.index')->withMessage('Job deleted.');
   }
 
