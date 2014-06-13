@@ -228,3 +228,5 @@ button.alert:hover, .button.alert:hover, button.alert:active, .button.alert:acti
     text-align: inherit !important;
   }
 }
+
+textarea { height: 15rem; }

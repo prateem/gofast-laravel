@@ -20,12 +20,5 @@ class JobController extends BaseController {
       return Redirect::route('jobs.index')->withError('Job posting not found.');
     }
   }
-  public function apply($id){
-  if ($job = Job::find($id)) {
-      $this->layout->title = $job->title;
-      $this->layout->content = View::make('jobs.apply')->withJob($job);
-    } else {
-      return Redirect::route('jobs.index')->withError('Job posting not found.');
-    }
-  }
+
 }
