@@ -157,13 +157,29 @@ if (!isset($error)) $error = Session::get('error', null);
   {{ HTML::script('js/foundation/foundation.topbar.js') }}
 
   <script type="text/javascript">
-    $(document).ready(function(){
-      <?php if(isset($datepicker)): ?>
+    <?php if(isset($datepicker)): ?>
+    $(window).load(function() {
       $('.datepicker').glDatePicker({
-        cssName: 'flatwhite'
-      });
-      <?php endif; ?>
+        cssName: 'flatwhite',
+        onClick: function(target, cell, date, data) {
+          var year = date.getFullYear();
+          var month = date.getMonth();
+          var day = date.getDate();
 
+          if (month < 10) month = "0" + month;
+          if (day < 10) day = "0" + day;
+
+          target.val(year + '-' + month + '-' + day);
+
+          if(data!=null) {
+            alert(data.message + '\n' + date);
+          }
+        }
+      });
+    })
+    <?php endif; ?>
+
+    $(document).ready(function(){
       $(document).foundation({
         topbar: {
           is_hover: false,

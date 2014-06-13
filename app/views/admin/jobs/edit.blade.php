@@ -33,7 +33,7 @@
   <div class="row">
     <div class="small-12 medium-4 columns">
       {{ Form::label('closing', 'Close Date (yyyy-mm-dd)') }}
-      {{ Form::input('date', 'closing') }}
+      {{ Form::input('date', 'closing', null, ['class' => 'datepicker']) }}
     </div>
   </div>
 
