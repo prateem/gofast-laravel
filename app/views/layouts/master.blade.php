@@ -25,7 +25,7 @@ if (!isset($error)) $error = Session::get('error', null);
   <link href="{{ asset('favicon.ico') }}" type="image/x-icon" rel="shortcut icon"/>
 
   {{ HTML::style('css/normalize.css') }}
-  {{ HTML::style('css/foundation.css') }}
+  {{ HTML::style('css/foundation.min.css') }}
   {{ HTML::style('css/custom.css') }}
   @if (isset($datepicker))
     {{ HTML::style('css/glDatePicker.flatwhite.css') }}
@@ -109,21 +109,21 @@ if (!isset($error)) $error = Session::get('error', null);
     <div class="row">
       <br/>
       <div class="small-12 medium-4 columns">
-        <ul class="no-bullet text-center">
+        <ul class="no-bullet small-text-centered medium-text-uncentered">
           <li>905-488-3118 (7am - 7pm)</li>
           <li>2828 Slough St.</li>
           <li>Mississauga, ON</li>
           <li>L4T 1G3</li>
         </ul>
       </div>
-      <div class="small-12 medium-4 columns">
-        <ul class="no-bullet text-center">
+      <div class="small-12 medium-4 columns text-center">
+        <ul class="no-bullet">
           <li>{{ HTML::mailto('gofastexpress@gmail.com') }}</li>
           <li>facebook link</li>
         </ul>
       </div>
-      <div class="small-12 medium-4 columns">
-        <ul class="no-bullet text-center show-for-medium-up">
+      <div class="small-12 medium-4 columns text-right">
+        <ul class="no-bullet show-for-medium-up">
           <li <?php if ($title == 'Home') echo 'class="active"'; ?>>{{ link_to_route('home', 'Home') }}</li>
           <li <?php if ($title == 'About') echo 'class="active"'; ?>>{{ link_to_route('about', 'About') }}</li>
           <li <?php if ($title == 'Quotes') echo 'class="active"'; ?>>{{ link_to_route('quotes', 'Quotes') }}</li>

@@ -1,5 +1,7 @@
-html { display: flex; }
-body { width: 100%; }
+html, body, p{
+font-family: 'Roboto', sans-serif;
+-webkit-font-smoothing:antialiased;
+}
 
 /* Push footer to bottom of page */
 .site {
@@ -31,14 +33,11 @@ main.content {
   }
 }
 
-html, body, p{
-font-family: 'Roboto', sans-serif;
--webkit-font-smoothing:antialiased;
-}
 h1,h2,h3,h4,h5,h6{
   font-family: 'Roboto Condensed', sans-serif;
   font-weight:bold;
 }
+
 header{
   background: #23538a;/* /* Old browsers */
   background-image:url(../img/office.jpg);
@@ -50,6 +49,7 @@ color:#fff;
 font-family: 'Patua One', sans-serif;
   font-weight:normal;
 }
+
 nav ul{
   margin-bottom:0;
   font-family: 'Roboto Condensed', sans-serif;
@@ -215,4 +215,16 @@ button.alert, .button.alert{
 button.alert:hover, .button.alert:hover, button.alert:active, .button.alert:active, button.alert:focus, .button.alert:focus{
   color:#EEE;
   background-color:#c0392b;
+}
+
+@media only screen{
+  ul.small-text-centered {
+    text-align: center !important;
+  }
+}
+
+@media only screen and (min-width: 40.063em) {
+  ul.medium-text-uncentered {
+    text-align: inherit !important;
+  }
 }
