@@ -10,7 +10,7 @@ class Crud extends Eloquent {
 
     static::saving(function($model)
     {
-      return $model->validates();
+      if (!$model->validates()) return false;
     });
 
   }
