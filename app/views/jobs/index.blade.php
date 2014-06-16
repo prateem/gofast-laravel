@@ -1,3 +1,4 @@
+<?php $date = new DateTime(); ?>
 <div class="row">
   <div class="small-12 columns">
     <div class="row">
@@ -26,7 +27,7 @@
           <td>{{ link_to_route('jobs.show', $job->title, $job->id) }}</td>
           <td>
             <?php
-              $date = new DateTime($job->created_at);
+              $date->modify($job->created_at);
               echo $date->format('Y-m-d');
             ?>
           </td>

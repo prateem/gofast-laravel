@@ -1,3 +1,4 @@
+<?php $date = new DateTime(); ?>
 <div class="row">
   <div class="small-12 columns">
     <h1>All Announcements</h1>
@@ -16,7 +17,7 @@
           <td>{{ link_to_route('admin.announcements.show', $announcement->title, $announcement->slug); }}</td>
           <td>
             <?php
-              $date = new DateTime($announcement->created_at);
+              $date->modify($announcement->created_at);
               echo $date->format('Y-m-d');
             ?>
           </td>
