@@ -26,25 +26,27 @@ Route::post('jobs/{id}/apply',      ['as' => 'jobs.submit', 'uses' => 'JobApplic
 Route::get('announcements',         ['as' => 'announcements.index', 'uses' => 'AnnouncementController@index']);
 Route::get('announcements/{slug}',  ['as' => 'announcements.show', 'uses' => 'AnnouncementController@show']);
 
+// All routes in this group belong to the /admin/ url.
+Route::group(['prefix' => 'admin'], function() {
+  // Must be logged in to access these routes.
+  Route::group(['before' => 'auth'], function() {
 
-// Must be logged in to access these routes.
-Route::group(['before' => 'auth'], function() {
+    // Home page
+    // -------------------------------------------
+    Route::get('/', ['as' => 'admin.home', 'uses' => 'AdminController@index']);
 
-  // Home page
-  // -------------------------------------------
-  Route::get('admin', ['as' => 'admin.home', 'uses' => 'AdminController@index']);
+    // Announcements
+    // -------------------------------------------
+    Route::resource('announcements', 'AdminAnnouncementController');
+    Route::resource('jobs', 'AdminJobController');
 
-  // Announcements
-  // -------------------------------------------
-  Route::resource('admin/announcements', 'AdminAnnouncementController');
-  Route::resource('admin/jobs', 'AdminJobController');
+    // Can't log out if you aren't logged in.
+    // -------------------------------------------
+    Route::get('logout', ['as' => 'logout', 'uses' => 'AdminController@logout']);
+  });
 
-  // Can't log out if you aren't logged in.
-  // -------------------------------------------
-  Route::get('admin/logout', ['as' => 'logout', 'uses' => 'AdminController@logout']);
+  Route::get('create',  ['as' => 'admin.create', 'uses' => 'AdminController@create']);
+  Route::post('create', ['as' => 'admin.store', 'uses' => 'AdminController@store']);
+  Route::get('login',   ['as' => 'login', 'uses' => 'AdminController@login']);
+  Route::post('login',  ['as' => 'doLogin', 'uses' => 'AdminController@doLogin']);
 });
-
-Route::get('admin/create',  ['as' => 'admin.create', 'uses' => 'AdminController@create']);
-Route::post('admin/create', ['as' => 'admin.store', 'uses' => 'AdminController@store']);
-Route::get('admin/login',   ['as' => 'login', 'uses' => 'AdminController@login']);
-Route::post('admin/login',  ['as' => 'doLogin', 'uses' => 'AdminController@doLogin']);
