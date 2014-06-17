@@ -2,7 +2,7 @@
   <div class="row">
     <div class="large-12 columns">
       <h1>Welcome to <span style="color:#ee6123;">Go Fast Express</span>!</h1>
-      <h4 class="subheader">Got a load? We got you covered. Request a quote today!</h4>
+      <h4 class="subheader">Got a load? We got you covered. Request a quote now!</h4>
     </div>
   </div>
   <div class="row show-for-medium-up">
@@ -53,22 +53,16 @@
     <img src="http://placehold.it/400x300&amp;text=[img]">
   </div>
   <div class="large-8 columns">
-    <h4>This is a content section.</h4>
-    <div class="row">
-      <div class="large-6 columns">
-      <p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong. Eiusmod swine spare ribs reprehenderit culpa. Boudin aliqua adipisicing rump corned beef.</p>
-      </div>
-      <div class="large-6 columns">
-      <p>Pork drumstick turkey fugiat. Tri-tip elit turducken pork chop in. Swine short ribs meatball irure bacon nulla pork belly cupidatat meatloaf cow. Nulla corned beef sunt ball tip, qui bresaola enim jowl. Capicola short ribs minim salami nulla nostrud pastrami.</p>
-      </div>
+    <h4>We're Go Fast Express.</h4>
+      <p>Go Fast is a truck based shipping company situated in the GTA. Founded in 2004 by a single driver with a single truck, we've grown to a fleet of trucks and trailers with over 15 experienced employees.</p>
     </div>
   </div>
 </div>
 <div class="row">
   <div class="large-8 columns">
-    <h4>This is a content section.</h4>
-    <p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong. Eiusmod swine spare ribs reprehenderit culpa. Boudin aliqua adipisicing rump corned beef.</p>
-    <p>Pork drumstick turkey fugiat. Tri-tip elit turducken pork chop in. Swine short ribs meatball irure bacon nulla pork belly cupidatat meatloaf cow. Nulla corned beef sunt ball tip, qui bresaola enim jowl. Capicola short ribs minim salami nulla nostrud pastrami.</p>
+    <h4>Services</h4>
+    <h5>Truckload Service</h5><p>We provide truck load service for both short and long haul requirements. Our seasoned drivers and well maintained equipment ensures that requested deliveries are made as promised. We ensure: <ul><li>All safety, maintenance and security requirements in place to reduce delays.</li><li> 24/7 centralized dispatch and in cab communications with drivers</li></ul></p>
+    <h5>Less than Truckload Service</h5><p>We utilize trusted cross dock facilities that deliver a host of benefits to our customers including services across Canada and on time performance.</p>
   </div>
   <div class="large-4 columns">
     <img src="http://placehold.it/400x300&amp;text=[img]">
