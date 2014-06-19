@@ -1,8 +1,14 @@
 <?php $date = new DateTime(); ?>
 <div class="row">
   <div class="small-12 columns">
-    <h1>All Announcements</h1>
-
+    <br/>
+    <div class="row">
+    <div class="small-6 columns">
+    <h1>All Announcements</h1></div>
+    <div class="small-6 columns text-right">
+    {{ link_to_route('admin.announcements.create', 'Post New Announcement', null, ['class' => 'button text-right']) }}
+    </div>
+    </div>
     <table>
       <thead>
       <tr>

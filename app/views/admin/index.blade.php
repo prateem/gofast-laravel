@@ -2,10 +2,7 @@
   <div class="small-12 columns">
     <h2>Administration Control Panel</h2>
     <hr/>
-
-    <h3>{{ link_to_route('admin.announcements.create', 'Post New Announcement') }}</h3>
-
-    <p>Most Recent Announcements</p>
+    <h3>Most Recent Announcements</h3>
     <table>
       <thead>
       <th>Title</th>
@@ -28,10 +25,7 @@
       </tbody>
     </table>
     <hr/>
-
-    <h3>{{ link_to_route('admin.jobs.create', 'Post New Job') }}</h3>
-
-    <p>Most Recent Job Postings</p>
+    <h3>Most Recent Job Postings</h3>
     <table>
       <thead>
       <th>Title</th>

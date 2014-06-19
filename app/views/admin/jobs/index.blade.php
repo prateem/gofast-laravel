@@ -1,8 +1,14 @@
 <?php $date = new DateTime(); ?>
 <div class="row">
   <div class="small-12 columns">
-    <h1>Job Postings</h1>
-
+    <br/>
+    <div class="row">
+    <div class="small-6 columns">
+    <h1>Job Postings</h1></div>
+    <div class="small-6 columns text-right">
+    {{ link_to_route('admin.jobs.create', 'Post New Job', null, ['class' => 'button text-right']) }}
+    </div>
+    </div>
     <table>
       <thead>
       <tr>
