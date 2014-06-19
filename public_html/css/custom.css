@@ -177,6 +177,7 @@ button, .button{
   -moz-transition:.5s;
   -webkit-transition:.5s;
   transition:.5s;
+  padding: .7em 2em;
 }
 button:hover, .button:hover, button:active, .button:active, button:focus, .button:focus{
   color:#EEE;
@@ -194,6 +195,7 @@ button.secondary, .button.secondary{
   -moz-transition:.5s;
   -webkit-transition:.5s;
   transition:.5s;
+  padding: .7em 2em;
 }
 button.secondary:hover, .button.secondary:hover, button.secondary:active, .button.secondary:active, button.secondary:focus, .button.secondary:focus{
   color:#EEE;
@@ -211,6 +213,7 @@ button.alert, .button.alert{
   -moz-transition:.5s;
   -webkit-transition:.5s;
   transition:.5s;
+  padding: .7em 2em;
 }
 button.alert:hover, .button.alert:hover, button.alert:active, .button.alert:active, button.alert:focus, .button.alert:focus{
   color:#EEE;
