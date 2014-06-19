@@ -17,7 +17,8 @@
       @endforeach
     </ul>
 
-    {{ Form::open(['route' => 'jobs.submit']) }}
+    {{ Form::open(['route' => 'jobs.application.submit', 'files' => true]) }}
+    {{ Form::hidden('job', $job->title) }}
     <div class="row">
       <div class="small-6 columns">
         {{ Form::label('firstName', 'First Name') }}

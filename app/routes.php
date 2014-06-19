@@ -21,7 +21,7 @@ Route::get('jobs',                  ['as' => 'jobs.index', 'uses' => 'JobControl
 Route::get('jobs/{id}',             ['as' => 'jobs.show', 'uses' => 'JobController@show']);
 
 Route::get('jobs/{id}/apply',       ['as' => 'jobs.apply', 'uses' => 'JobApplicationController@show']);
-Route::post('jobs/{id}/apply',      ['as' => 'jobs.submit', 'uses' => 'JobApplicationController@store']);
+Route::post('jobs/{id}/apply',      ['as' => 'jobs.application.submit', 'uses' => 'JobApplicationController@send']);
 
 Route::get('announcements',         ['as' => 'announcements.index', 'uses' => 'AnnouncementController@index']);
 Route::get('announcements/{slug}',  ['as' => 'announcements.show', 'uses' => 'AnnouncementController@show']);

@@ -20,12 +20,24 @@ class JobApplicationController extends BaseController {
     }
   }
 
-  public function store() {
-    $input = Input::all();
-    $validation = Validator::make($input, $this->rules);
+  public function send() {
+    $data = Input::only('job', 'firstName', 'lastName', 'phone', 'email', 'resume', 'resumeText');
+    $validation = Validator::make($data, $this->rules);
 
     if ($validation->passes()) {
-      return "lol ok yer hired";
+      $data['fullName'] = $data['firstName'].' '.$data['lastName'];
+      $data['attachment'] = (($resume = Input::file('resume')) ? false : true);
+
+      Mail::send('emails.application', $data, function($message) use ($data, $resume) {
+        $message->to('gofastquotes@gmail.com');
+        $message->from('no-reply@gofast.com', 'GoFast Webmaster');
+        $message->subject($data['fullName'] . ' has applied for ' . $data['job']);
+
+        if ($data['attachment'] === true) {
+          $message->attach($resume->getRealPath(), ['as' => $data['firstName'].$data['lastName'].'.'.$resume->getClientOriginalExtension(), 'mime' => $resume->getMimeType()]);
+        }
+      });
+      return Redirect::route('jobs.index')->withMessage('Job application sent.');
     } else {
       return Redirect::back()->withInput()->withErrors($validation->messages());
     }
