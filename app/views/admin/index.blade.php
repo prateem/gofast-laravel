@@ -24,6 +24,7 @@
       @endforeach
       </tbody>
     </table>
+    {{ link_to_route('admin.announcements.index', 'View All', null, ['class' => 'button right']) }}
     <hr/>
     <h3>Most Recent Job Postings</h3>
     <table>
@@ -51,5 +52,6 @@
       @endforeach
       </tbody>
     </table>
+    {{ link_to_route('admin.jobs.index', 'View All', null, ['class' => 'button right']) }}
   </div>
 </div>
