@@ -73,6 +73,15 @@ nav a:hover{
   background-color:#EEE;
   color:#000;
 }
+.top-bar .toggle-topbar.menu-icon a{
+	width:0;
+}
+.contain-to-grid .top-bar{
+	margin-bottom:5px;
+}
+.top-bar ul{
+	margin-top:5px;
+}
 .top-bar .toggle-topbar ul{
   margin-bottom:0;
   font-family: 'Roboto Condensed', sans-serif;
